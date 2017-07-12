@@ -19,11 +19,11 @@
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tbody>
         <tr>
-          <td width="51%"><img src="<?php echo base_url(); ?>assets/images/logo1.png" alt="sms plus" width="270" height="83"></td>
+          <td width="51%"><a href="<?php echo  base_url(); ?>"><img src="<?php echo base_url(); ?>assets/images/logo1.png" alt="sms plus" width="270" height="83" /></a></td>
           <td width="49%"><div>
-              <div> </div>
-              <?php echo form_open('login'); ?>
-              <input name="login_frm" type="hidden" id="login_frm" value="1">
+			  <?php if(!$logged): ?>
+			  <?php if(validation_errors()){ ?><span style="color:red; font-size:9px"><?php echo validation_errors(); ?></span><?php } ?>
+              <?php echo form_open('welcome/login'); ?>
               <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tbody>
                   <tr>
@@ -33,7 +33,7 @@
                   </tr>
                   <tr>
                     <td><label>
-                      <input name="username" type="text" class="textfield1" id="username" value="">
+                      <input name="username" type="text" class="textfield1" id="username" value="<?php echo set_value('username'); ?>">
                       </label></td>
                     <td><input name="lpassword" type="password" class="textfield1" id="lpassword" value=""></td>
                     <td><label>
@@ -41,15 +41,17 @@
                       </label></td>
                   </tr>
                   <tr>
-                    <td><input name="redi" type="radio" value="uemp" checked="checked">
+                    <!--<td><input name="utype" type="radio" value="user" checked="checked">
                       User &nbsp;
-                      <input name="redi" type="radio" value="reemp">
-                      ReSeller </td>
+                      <input name="utype" type="radio" value="reseller">
+                      ReSeller </td>-->
+					 <td>&nbsp;</td>
                     <td colspan="2"><a href="<?php echo base_url(); ?>register">Registration</a> | <a href="<?php echo base_url(); ?>forgotpassword">Forgot Your Password?</a></td>
                   </tr>
                 </tbody>
               </table>
               </form>
+			  <?php endif; ?>
             </div></td>
         </tr>
       </tbody>

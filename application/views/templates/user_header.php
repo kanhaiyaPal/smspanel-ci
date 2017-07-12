@@ -4,49 +4,54 @@
 <head>
 <meta charset="UTF-8">
 <title><?php echo $title; ?></title>
+<!-- jQuery UI -->
+<link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet" media="screen">
+<!-- Bootstrap -->
+<link href="<?php echo base_url(); ?>assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet" type="text/css">
 </head>
-<body style="background-color:#585957">
+<body>
 <center>
-<div class="h-header">
-  <div class="h-header-inner">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tbody>
-        <tr>
-          <td width="51%"><img src="<?php echo base_url(); ?>assets/images/logo1.png" alt="sms plus" width="270" height="83"></td>
-          <td width="49%"><div>
-              <div> </div>
-              <?php echo form_open('login'); ?>
-              <input name="login_frm" type="hidden" id="login_frm" value="1">
-              <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tbody>
-                  <tr>
-                    <td>User ID: </td>
-                    <td>Password:</td>
-                    <td>&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td><label>
-                      <input name="username" type="text" class="textfield1" id="username" value="">
-                      </label></td>
-                    <td><input name="lpassword" type="password" class="textfield1" id="lpassword" value=""></td>
-                    <td><label>
-                      <input type="image" name="imageField" id="imageField" src="<?php echo base_url(); ?>assets/images/btn1.jpg">
-                      </label></td>
-                  </tr>
-                  <tr>
-                    <td><input name="redi" type="radio" value="uemp" checked="checked">
-                      User &nbsp;
-                      <input name="redi" type="radio" value="reemp">
-                      ReSeller </td>
-                    <td colspan="2"><a href="<?php echo base_url(); ?>register">Registration</a> | <a href="<?php echo base_url(); ?>forgotpassword">Forgot Your Password?</a></td>
-                  </tr>
-                </tbody>
-              </table>
-              </form>
-            </div></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+<div class="top">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+   <tr>
+      <td width="52%" align="left"><a href="<?php echo  base_url(); ?>"><img src="<?php echo base_url(); ?>assets/images/logo1.png" alt="sms plus" width="270" height="83" /></a></td>
+      <td width="17%" align="center" style="padding-top:17px;">Total Credit: <strong>47 </strong> </td>
+      <td width="14%" align="center"><a href="http://localhost/kanhaiya/SMS%20panel/online/notification.php">Notification:<span class="notification" id="notification">1</span></a></td>
+      <td width="17%" align="center" style="padding-top:17px;">Expiry Date: <strong>2030-06-20</strong></td>
+    </tr>
+	<tr>
+	<td colspan="4">
+	<ul class="nav nav-tabs topmenu" role="tablist">
+	  <li class="nav-item active">
+		<a class="nav-link active" data-toggle="tab" href="#dashboard" role="tab">Dashboard</a>
+	  </li>
+	  <li class="nav-item">
+		<a class="nav-link" data-toggle="tab" href="#managetemplates" role="tab">Manage Templates</a>
+	  </li>
+	  <li class="nav-item">
+		<a class="nav-link" data-toggle="tab" href="#uploadcontact" role="tab">Upload Contact</a>
+	  </li>
+	  <li class="nav-item">
+		<a class="nav-link" data-toggle="tab" href="#composesms" role="tab">Compose SMS</a>
+	  </li>
+	  <li class="nav-item">
+		<a class="nav-link" data-toggle="tab" href="#smshistory" role="tab">SMS History</a>
+	  </li>
+	  <li class="nav-item">
+		<a class="nav-link" data-toggle="tab" href="#offers" role="tab">Offers</a>
+	  </li>
+	  <li class="nav-item">
+		<a class="nav-link" data-toggle="tab" href="#smsidea" role="tab">SMS Idea</a>
+	  </li>
+	  <li class="nav-item">
+		<a class="nav-link" data-toggle="tab" href="#report" role="tab">Report</a>
+	  </li>
+	  <li class="nav-item">
+		<a class="nav-link" data-toggle="tab" href="#logout" role="tab">Logout</a>
+	  </li>
+	</ul>
+	</td>
+</tr>
+</table>
+</div><!--.top-->

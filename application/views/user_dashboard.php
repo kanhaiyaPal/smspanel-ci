@@ -1,22 +1,16 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-
-<div class="h-content">
-  <div class="h-content-inner">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tbody>
-        <tr>
-          <td width="37%"><h1 align="center" style="font-size:25px; line-height:30px;">THERE IS A BETTER WAY</h1>
-            <h1 align="center" style="font-size:45px; line-height:50px;">TO DO MARKETING</h1>
-            <h2 align="center">Your business deserve it, we help you do it.</h2>
-            <p>&nbsp;</p>
-            <p align="center"><img src="<?php echo base_url(); ?>assets/images/mobile-home.png" alt="sms" width="370" height="201"></p></td>
-          <td width="63%" align="right" valign="bottom"><img src="<?php echo base_url(); ?>assets/images/home1.png" alt="sms" width="519" height="344"></td>
-        </tr>
-        <tr>
-          <td><div class="register"><a href="<?php echo base_url(); ?>register"><img src="<?php echo base_url(); ?>assets/images/register_now1.png" alt="register" width="250" height="240"></a></div></td>
-          <td align="right" valign="bottom">&nbsp;</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<div class="content">
+	<!-- Tab panes -->
+	<div class="tab-content">
+	  <div class="tab-pane active" id="dashboard" role="tabpanel"><?php echo $dashboard; ?></div>
+	  <div class="tab-pane" id="managetemplates" role="tabpanel"><?php echo $templates; ?></div>
+	  <div class="tab-pane" id="uploadcontact" role="tabpanel"><?php echo $content; ?></div>
+	  <div class="tab-pane" id="composesms" role="tabpanel"><?php echo $compose; ?></div>
+	  <div class="tab-pane" id="smshistory" role="tabpanel"><?php echo $history; ?></div>
+	  <div class="tab-pane" id="offers" role="tabpanel"><?php echo $offers; ?></div>
+	  <div class="tab-pane" id="smsidea" role="tabpanel"><?php echo $idea; ?></div>
+	  <div class="tab-pane" id="report" role="tabpanel"><?php echo $report; ?>.</div>
+	</div>
+	<!--.Tab panes -->
 </div>
+<div style="clear:both">&nbsp;</div>

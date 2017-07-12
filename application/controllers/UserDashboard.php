@@ -14,40 +14,17 @@ class UserDashboard extends CI_Controller {
 		
         $data['title'] = ucfirst('GAP Infotech : Online SMS Panel'); // Capitalize the first letter
 
+		$data['dashboard'] = $this->load->view('userdashboard/dashboard','', TRUE);
+		$data['templates'] = $this->load->view('userdashboard/templates','', TRUE);
+		$data['content'] = $this->load->view('userdashboard/content','', TRUE);
+		$data['compose'] = $this->load->view('userdashboard/compose','', TRUE);
+		$data['history'] = $this->load->view('userdashboard/history','', TRUE);
+		$data['offers'] = $this->load->view('userdashboard/offers','', TRUE);
+		$data['idea'] = $this->load->view('userdashboard/idea','', TRUE);
+		$data['report'] = $this->load->view('userdashboard/report','', TRUE);
+		
         $this->load->view('templates/user_header', $data);
-        $this->load->view('landing_page', $data);
-        $this->load->view('templates/footer', $data);
-	}
-	
-	public function register()
-	{
-		if ( ! file_exists(APPPATH.'views/register_request.php'))
-        {
-                // Whoops, we don't have a page for that!
-                show_404();
-        }
-		$this->load->helper('form');
-		
-        $data['title'] = ucfirst('GAP Infotech : Online SMS Panel'); // Capitalize the first letter
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('register_request', $data);
-        $this->load->view('templates/footer', $data);
-	}
-	
-	public function forgotpassword()
-	{
-		if ( ! file_exists(APPPATH.'views/forgot_password.php'))
-        {
-                // Whoops, we don't have a page for that!
-                show_404();
-        }
-		$this->load->helper('form');
-		
-        $data['title'] = ucfirst('GAP Infotech : Online SMS Panel'); // Capitalize the first letter
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('forgot_password', $data);
+        $this->load->view('user_dashboard', $data);
         $this->load->view('templates/footer', $data);
 	}
 }

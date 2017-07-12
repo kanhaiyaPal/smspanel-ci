@@ -3450,7 +3450,8 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 	cursor: default;
 	background-color: #fff;
 	border: 1px solid #ddd;
-	border-bottom-color: transparent
+	border-bottom-color: transparent;
+	background-image:none !important;
 }
 .nav-tabs.nav-justified {
 	width: 100%;

@@ -202,15 +202,11 @@ h2 {
 	background-image: url(../images/tm.gif);
 	background-repeat: repeat-x;
 	background-position: left top;
-	padding-right: 18px;
-	padding-left: 18px;
 	text-align: center;
 	float: left;
 	font-size: 15px;
 	font-weight: lighter;
-	color: #FFFFFF;
 	text-decoration: none;
-	line-height: 40px;
 	height: 40px;
 	font-family: 'Roboto Condensed', sans-serif;
 	border-radius: 5px 5px 0 0;
@@ -352,7 +348,7 @@ h2 {
 
 
 
-
+/*
 .alert {
 	color: #CC0000;
 	text-decoration: none;
@@ -369,7 +365,7 @@ h2 {
 	border-radius: 20px;
 	-moz-border-radius: 20px;
 	text-align: center;
-}
+}*/
 
 
 .textfield1 {

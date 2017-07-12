@@ -13,7 +13,12 @@
           <td width="63%" align="right" valign="bottom"><img src="<?php echo base_url(); ?>assets/images/home1.png" alt="sms" width="519" height="344"></td>
         </tr>
         <tr>
-          <td><div class="register"><a href="<?php echo base_url(); ?>register"><img src="<?php echo base_url(); ?>assets/images/register_now1.png" alt="register" width="250" height="240"></a></div></td>
+          <td>
+		  <?php if(!$logged): ?>
+		  <div class="register"><a href="<?php echo base_url(); ?>register"><img src="<?php echo base_url(); ?>assets/images/register_now1.png" alt="register" width="250" height="240"></a></div>
+		  <?php else: ?>
+		  
+		  <?php endif; ?></td>
           <td align="right" valign="bottom">&nbsp;</td>
         </tr>
       </tbody>
