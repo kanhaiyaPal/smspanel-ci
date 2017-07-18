@@ -48,10 +48,9 @@ class Authentication extends CI_Model {
 	public function logged_in_status()
 	{
 		 if(($this->session->has_userdata('admin_session')) || ($this->session->has_userdata('subadmin_session')) || ($this->session->has_userdata('user_session'))){
-			 
-			 return true;
+			return true;
 		 }else{
-			 return false;
+			return false;
 		 }
 	}
 	

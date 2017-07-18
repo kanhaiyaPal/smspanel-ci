@@ -28,26 +28,37 @@
 				autoclose: true
 		});
 		
+		$('.report_date').datepicker({
+				format: 'dd-mm-yyyy',
+				autoclose: true
+		});
+		
 		$('#usertable').dataTable();
 		$('#registerenquiry').dataTable();
 		$('#resellertable').dataTable();
+		$('#notification_table').dataTable();
+		$('#smsideas_table').dataTable();
+		$('#offers_table').dataTable();
+		$('#usersms_table').dataTable();
+		$('#balances_table').dataTable();
+		
 		$('#registeruser').on('shown.bs.modal', function (event) {
 			  $('#register_user_form')[0].reset();
 		});
 		$('#edituser').on('shown.bs.modal', function (event) {
 			  $('#edit_user_form')[0].reset();
 			
-			  var button = $(event.relatedTarget); // Button that triggered the modal
-			  var expiry = button.data('expiry'); // Extract info from data-* attributes
-			  var name = button.data('name'); // Extract info from data-* attributes
-			  var email = button.data('email'); // Extract info from data-* attributes
-			  var mobile = button.data('mobile'); // Extract info from data-* attributes
-			  var address = button.data('address'); // Extract info from data-* attributes
-			  var city = button.data('city'); // Extract info from data-* attributes
-			  var company = button.data('company'); // Extract info from data-* attributes
-			  var rm_name = button.data('rmname'); // Extract info from data-* attributes
-			  var rm_contact = button.data('rmcontact');// Extract info from data-* attributes
-			  var rm_email = button.data('rmemail'); // Extract info from data-* attributes
+			  var button = $(event.relatedTarget); 
+			  var expiry = button.data('expiry'); 
+			  var name = button.data('name'); 
+			  var email = button.data('email'); 
+			  var mobile = button.data('mobile'); 
+			  var address = button.data('address');
+			  var city = button.data('city'); 
+			  var company = button.data('company'); 
+			  var rm_name = button.data('rmname'); 
+			  var rm_contact = button.data('rmcontact');
+			  var rm_email = button.data('rmemail'); 
 			  var u_id = button.data('uid');
 			  var uname = button.data('username');
 			  var u_pass = button.data('password');
@@ -86,10 +97,10 @@
 		<?php if(validation_errors() && ($this->uri->segment(2)) == 'edit_user') { echo "$('#edituser').modal('show');"; } ?>
 		
 		$('#register_user_enquiry').on('shown.bs.modal', function (event) {
-			  var button = $(event.relatedTarget); // Button that triggered the modal
-			  var name = button.data('name'); // Extract info from data-* attributes
-			  var mobile = button.data('mobile'); // Extract info from data-* attributes
-			  var email = button.data('email'); // Extract info from data-* attributes
+			  var button = $(event.relatedTarget); 
+			  var name = button.data('name'); 
+			  var mobile = button.data('mobile'); 
+			  var email = button.data('email'); 
 			  var address = button.data('address');
 			  var sms_count = button.data('totalcredit');
 			  var eid = button.data('enqid');
@@ -102,6 +113,23 @@
 			  modal.find('.modal-body input#enq_mobile').val(mobile);
 			  modal.find('.modal-body input#enq_quant').val(sms_count);
 			  modal.find('.modal-body input#enq_id').val(eid);
+		});
+		
+		$('#showdetailusersms').on('shown.bs.modal', function (event) {
+			  var button = $(event.relatedTarget); 
+			  var name = button.data('name'); 
+			  var sms = button.data('text'); 
+			  var datetime = button.data('date'); 
+			  var file = button.data('file');
+			 
+			  
+			  var modal = $(this)
+			  
+			  modal.find('.modal-body input#user_name_usersms').val(name);
+			  modal.find('.modal-body input#user_text_usersms').html(sms);
+			  modal.find('.modal-body input#user_date_usersms').val(datetime);
+			 modal.find('.modal-body a#user_date_usersms').html(file);
+			 modal.find('.modal-body a#user_date_usersms').attr("href", "http://www.google.com/"+file);
 		});
 		
 		$('#checkall').click(function() {
@@ -140,7 +168,61 @@
 			}
 		  });
 		});
+		
+		$('#checkallusms').click(function() {
+
+		  var _this = this;
+		  $('td').find('input[name="mass_updusms[]"]').each(function() {
+		   
+			if ($(_this).is(':checked')) {
+			  $(this).prop('checked', true);
+			} else {
+			  $(this).prop('checked', false);
+			}
+		  });
+		});
+		
 	});
+	
+	/*Notification collapse*/
+	function show_edit_collapse(anchor)
+	{
+		var id = $(anchor).attr("data-id"); 
+		var name = $(anchor).attr("data-name"); 
+		var description = $(anchor).attr("data-description"); 
+		
+		$('#notfy_name').val(name);
+		$('#notify_id').val(id);
+		$('#notfy_description').html(description);
+		
+		$('#editnotificationcollapse').collapse('toggle');
+	}
+	
+	function show_smsedit_collapse(anchor)
+	{
+		var id = $(anchor).attr("data-id"); 
+		var name = $(anchor).attr("data-name"); 
+		var description = $(anchor).attr("data-description"); 
+		
+		$('#sms_name').val(name);
+		$('#sms_id').val(id);
+		$('#sms_description').html(description);
+		
+		$('#editsmsideacollapse').collapse('toggle');
+	}
+	
+	function show_offeredit_collapse(anchor)
+	{
+		var id = $(anchor).attr("data-id"); 
+		var name = $(anchor).attr("data-name"); 
+		var description = $(anchor).attr("data-description"); 
+		
+		$('#offer_name').val(name);
+		$('#offer_id').val(id);
+		$('#offer_description').html(description);
+		
+		$('#editoffercollapse').collapse('toggle');
+	}
 	</script>
 	<style>
 	table.ed_tbl tr td{ padding:0 2px 0 2px; }

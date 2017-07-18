@@ -20,6 +20,19 @@ class Welcome extends CI_Controller {
 		
 		$data['logged'] = $this->authentication->logged_in_status();
 		
+		$data['dashboard_link'] = base_url();
+		if($this->authentication->logged_in_status()){
+			if($this->session->has_userdata('admin_session')){
+				$data['dashboard_link'] .= 'admindashboard';
+			}
+			if($this->session->has_userdata('subadmin_session')){
+				$data['dashboard_link'] .= '';
+			}
+			if($this->session->has_userdata('user_session')){
+				$data['dashboard_link'] .= 'userdashboard';
+			}
+		}
+		
         $data['title'] = ucfirst('GAP Infotech : Online SMS Panel'); // Capitalize the first letter
 
         $this->load->view('templates/header', $data);
@@ -84,11 +97,15 @@ class Welcome extends CI_Controller {
 				if($this->authentication->verify_pass($this->input->post('lpassword'),$user_valid['password']))
 				{
 					$user_data = $this->authentication->get_userdata($user_valid['uid']);
-					$this->authentication->generate_sessions($user_data);					
+					$this->authentication->generate_sessions($user_data);	
+					redirect(base_url(),'refresh');
 				}else{
 					$this->session->set_flashdata('login_error', 'Username/Password is incorrect');
 					redirect(base_url(),'refresh');
 				}
+			}else{
+				$this->session->set_flashdata('login_error', 'Username/Password is incorrect');
+				redirect(base_url(),'refresh');
 			}
 		}
 	}

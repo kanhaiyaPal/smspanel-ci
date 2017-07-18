@@ -23,6 +23,7 @@
           <td width="49%"><div>
 			  <?php if(!$logged): ?>
 			  <?php if(validation_errors()){ ?><span style="color:red; font-size:9px"><?php echo validation_errors(); ?></span><?php } ?>
+			  <?php if($this->session->flashdata('login_error')){ ?><span style="color:red; font-size:9px"><?php echo $this->session->flashdata('login_error'); ?></span><?php }?>
               <?php echo form_open('welcome/login'); ?>
               <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tbody>
@@ -51,6 +52,8 @@
                 </tbody>
               </table>
               </form>
+			  <?php else: ?>
+				<a class="btn btn-primary" href="<?php echo $dashboard_link; ?>">Go to Dashboard</a>
 			  <?php endif; ?>
             </div></td>
         </tr>
