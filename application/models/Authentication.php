@@ -12,7 +12,7 @@ class Authentication extends CI_Model {
 	{
 		if($username != '')
 		{
-			$query = $this->db->get_where('users',array('username'=> $username));
+			$query = $this->db->get_where('users',array('username'=> $username,'status'=>'1'));
 			$result_count = $query->num_rows();
 			$result_row = $query->row_array();
 			
@@ -66,7 +66,7 @@ class Authentication extends CI_Model {
 								'logged_in' => TRUE
 						);
 						$this->session->set_userdata('admin_session',$admindata);
-						redirect(base_url().'AdminDashboard');
+						redirect(base_url().'admindashboard');
 						break; 
 					}
 			case '2':{
@@ -79,7 +79,7 @@ class Authentication extends CI_Model {
 								'logged_in' => TRUE
 						);
 						$this->session->set_userdata('subadmin_session',$subadmindata);
-						redirect(base_url().'UserDashboard');
+						redirect(base_url().'userdashboard');
 						break; 
 					}
 			case '3':{
@@ -92,7 +92,7 @@ class Authentication extends CI_Model {
 								'logged_in' => TRUE
 						);
 						$this->session->set_userdata('user_session',$userdata);
-						redirect(base_url().'UserDashboard');
+						redirect(base_url().'userdashboard');
 						break; 
 					}
 		}

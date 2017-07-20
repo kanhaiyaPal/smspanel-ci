@@ -25,7 +25,6 @@ class AdminDashboard extends CI_Controller {
         $data['title'] = ucfirst('GAP Infotech : Online SMS Panel'); // Capitalize the first letter
 		
 		/*User list data*/
-		$this->load->library('pagination');
 		
 		$this->load->model('userlist');
 		$users['users'] = $this->userlist->get_users();
@@ -57,16 +56,18 @@ class AdminDashboard extends CI_Controller {
 		
 		/*User SMS Data*/
 		$this->load->model('usersms');
+		$this->load->model('contact');
 		$show_data = array();
 		$raw_data = $this->usersms->get_usersms();
-		foreach($raw_data as $data)
+		foreach($raw_data as $data_r)
 		{
 			$show_data[] = array(
-				'id' => $data['id'],
-				'text' => $data['content'],
-				'date_time' => $data['scheduled_on'].'/'.$data['time'],
-				'name' => $this->usersms->get_userdetails($data['user_id']),
-				'file' => $this->usersms->get_filedetails($data['file_id'])
+				'id' => $data_r['id'],
+				'text' => $data_r['content'],
+				'date_time' => $data_r['scheduled_on'].'/'.$data_r['time'],
+				'name' => $this->usersms->get_userdetails($data_r['user_id']),
+				'file_title' => $this->contact->get_contactfiletitle_byid($data_r['file_id']),
+				'org_file' => $this->contact->get_contactfilename_byid($data_r['file_id']),
 			);
 		}
 		$smsdata['smsdata'] = $show_data;
@@ -106,9 +107,9 @@ class AdminDashboard extends CI_Controller {
 				'file_name' => $this->usersms->get_filedetails($reps['file_id'])
 			);
 		}
-		$report['reports'] =
+		$report['reports'] = $ret_reports;
 		
-		$data['report'] = $this->load->view('admindashboard/reports','', TRUE);
+		$data['report'] = $this->load->view('admindashboard/reports',$report, TRUE);
 		
         $this->load->view('templates/admin_header', $data);
         $this->load->view('admin_dashboard', $data);
@@ -411,7 +412,7 @@ class AdminDashboard extends CI_Controller {
 	{
 		if($id){
 			$this->load->model('usersms');
-			$this->smsoffers->delete_usersms($id);
+			$this->usersms->delete_usersms($id);
 			
 			$this->session->set_flashdata('usersms_success','User SMS Deleted Successfully');
 			redirect(base_url().'admindashboard','refresh');
@@ -464,6 +465,17 @@ class AdminDashboard extends CI_Controller {
 		
 		$this->form_validation->set_rules('report_user_id', 'User', 'trim|required');
 		$this->form_validation->set_rules('report_date', 'Report Date', 'trim|required');
+		
+		if ($this->form_validation->run() == FALSE){
+			
+			$this->session->set_flashdata('report_errors', validation_errors());
+			redirect(base_url().'admindashboard','refresh');
+		}else{
+			$this->reports->set_report();
+			
+			$this->session->set_flashdata('report_success','Report Added Successfully');
+			redirect(base_url().'admindashboard','refresh');
+		}
 	}
 	
 	public function delete_reportgen($id = 0)

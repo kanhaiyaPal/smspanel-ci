@@ -304,7 +304,15 @@ switch (ENVIRONMENT)
 	}
 
 	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
-
+	
+	//custom images paths definitions
+	define('UPLOAD_PATH_CONTACTS', APPPATH.'../uploads/contacts/');
+	define('UPLOAD_PATH_REPORTS', APPPATH.'../uploads/reports/');
+	define('UPLOAD_PATH_TEMPLATES', APPPATH.'../uploads/templates/');
+	
+	//custom admin data definitions
+	define('ADMIN_EMAIL', 'sales@smsplus.in');
+	define('FROM_EMAIL', 'no-reply@smsplus.in');
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE

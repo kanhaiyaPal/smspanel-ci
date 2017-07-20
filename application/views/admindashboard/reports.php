@@ -24,7 +24,7 @@
 				
 				<!--Add Offers-->
 				<div class="row">
-				  <?php echo form_open('admindashboard/addnew_report'); ?>
+				  <?php echo form_open_multipart('admindashboard/addnew_report',array('onsubmit'=>'checkFile(event)')); ?>
 				  <div class="col-md-12">
 					<div class="row">
 					  <div class="col-md-3">
@@ -39,7 +39,7 @@
 							<input type="text" name="report_date" class="form-control report_date" required placeholder="Date of Report" />
 						</div>
 						<div class="col-md-3">
-							<input type="file" name="report_file"  class="form-control" required />
+							<input type="file" name="report_file" class="form-control" required />
 						</div>
 						<div class="col-md-3"><input class="btn btn-primary" type="submit" name="addreport" value="Add" /></div>
 					</div>
@@ -48,7 +48,7 @@
 				</div>
 				<div class="col-md-12"><hr/></div>
 				
-				<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="balances_table">
+				<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="reports_table">
 					<thead>
 						<tr>
 							<th>Name</th>
@@ -62,8 +62,8 @@
 							foreach($reports as $item) {
 								echo '<tr>';
 								echo '<td>'.$item['name'].'</td>';
-								echo '<td>'.date('d.m-Y',strtotime($item['date'])).'</td>';
-								echo '<td><a href="">'.$item['filename'].'</a></td>';
+								echo '<td>'.date('d-m-Y',strtotime($item['date'])).'</td>';
+								echo '<td><a href="'.base_url().'uploads/reports/'.$item['file_name'].'">'.$item['file_name'].'</a></td>';
 								echo '<td><a href="'.base_url().'admindashboard/delete_reportgen/'.$item['id'].'"><img src="'.base_url().'assets/images/del.gif" width="12" height="12" border="0" class="text12"></a></td>';
 								echo '</tr>';
 							}

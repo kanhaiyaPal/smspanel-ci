@@ -32,8 +32,8 @@
 					<div class="col-md-12">
 						<textarea name="notfy_description" class="form-control" required placeholder="Description" ></textarea>
 					</div><div class="col-md-12"><br/></div>
-					<div class="col-md-11"></div>
-					<div class="col-md-1"><input class="btn btn-primary" type="submit" name="addnotify" value="Add" /></div>
+					<div class="col-md-10"></div>
+					<div class="col-md-2"><input class="btn btn-primary" type="submit" name="addnotify" value="Add" /> &nbsp; <input data-toggle="collapse" href="#addnotificationcollapse" class="btn btn-default" type="button" value="Cancel" /></div>
 				  </div>
 				  <?php echo form_close(); ?>
 				</div>
@@ -48,8 +48,8 @@
 					<div class="col-md-12">
 						<textarea name="notfy_description" class="form-control" id="notfy_description" required placeholder="Description" ></textarea>
 					</div><div class="col-md-12"><br/></div>
-					<div class="col-md-11"><input type="hidden" name="notify_id" id="notify_id" value="" /></div>
-					<div class="col-md-1"><input class="btn btn-primary" type="submit" name="addnotify" value="Edit" /></div>
+					<div class="col-md-10"><input type="hidden" name="notify_id" id="notify_id" value="" /></div>
+					<div class="col-md-2"><input class="btn btn-primary" type="submit" name="addnotify" value="Edit" /> &nbsp; <input data-toggle="collapse" href="#editnotificationcollapse" class="btn btn-default" type="button" value="Cancel" /></div>
 				  </div>
 				  <?php echo form_close(); ?>
 				</div>

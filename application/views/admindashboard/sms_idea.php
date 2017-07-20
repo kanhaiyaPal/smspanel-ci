@@ -32,8 +32,8 @@
 					<div class="col-md-12">
 						<textarea name="mixdata_description" class="form-control" required placeholder="Description" ></textarea>
 					</div><div class="col-md-12"><br/></div>
-					<div class="col-md-11"></div>
-					<div class="col-md-1"><input class="btn btn-primary" type="submit" name="addsms" value="Add" /></div>
+					<div class="col-md-10"></div>
+					<div class="col-md-2"><input class="btn btn-primary" type="submit" name="addsms" value="Add" />&nbsp;<input class="btn btn-default" data-toggle="collapse" href="#addsmsideacollapse" type="button" value="Cancel" /></div>
 				  </div>
 				  <?php echo form_close(); ?>
 				</div>
@@ -48,8 +48,8 @@
 					<div class="col-md-12">
 						<textarea name="mixdata_description" class="form-control" id="sms_description" required placeholder="Description" ></textarea>
 					</div><div class="col-md-12"><br/></div>
-					<div class="col-md-11"><input type="hidden" name="sms_id" id="sms_id" value="" /></div>
-					<div class="col-md-1"><input class="btn btn-primary" type="submit" name="addsms" value="Edit" /></div>
+					<div class="col-md-10"><input type="hidden" name="sms_id" id="sms_id" value="" /></div>
+					<div class="col-md-2"><input class="btn btn-primary" type="submit" name="addsms" value="Edit" />&nbsp;<input class="btn btn-default" data-toggle="collapse" href="#editsmsideacollapse" type="button" value="Cancel" /></div>
 				  </div>
 				  <?php echo form_close(); ?>
 				</div>

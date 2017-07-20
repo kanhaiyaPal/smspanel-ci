@@ -1,153 +1,86 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<div class="content">
-	<script language="javascript">
- 	function closed() {
- 					document.getElementById("box-warning").style.display = 'none'
- 					}
-</script>
 
-<h1>Manage Templates</h1>
-<div id="content-content">
-  <div class="link-group1"> <a href="javascript:history.back(-1)" class="link-top button2">Back</a> &nbsp; | &nbsp; <a href="javascript:void(0)" onclick="showaddedit(&#39;add&#39;,0,0,0,0,0,0)" class="link-top button2">Add </a> &nbsp; | &nbsp; <a href="javascript:void(0)" onclick="document.getElementById(&#39;addaward&#39;).style.display=&#39;none&#39;" class="link-top button2">Hide  add/edit window </a> </div>
-    <fieldset id="addaward" style="display:none; width:500px" class="box1">
-  &nbsp;
-  <legend style="font-weight:bold;">Add </legend>
-  <form name="kcr_constant" action="http://localhost/kanhaiya/SMS%20panel/online/sms_tpl.php" method="POST" onsubmit="return validate()" style="margin:0px; padding: 0px;">
-    <table width="500" cellpadding="2" cellspacing="0" border="0" class="tablebgHeadingrow">
-      <tbody><tr class="tr-form">
-        <td width="129" align="right" nowrap="" class="td-form"><div class="label-form"><strong> Name	: </strong></div></td>
-        <td width="363" align="left" class="td-form"><input name="name" type="text" class="textfield1" id="name" style="width:300px;" onclick="javascript:closed();">
-        </td>
-      </tr>
-      <tr class="tr-form">
-        <td align="right" nowrap="" class="td-form"><strong>Description:</strong></td>
-        <td align="left" class="td-form"><textarea name="con" id="con" style="height:100px; width:300px" class="textarea1"></textarea></td>
-      </tr>
-      <tr class="tr-form">
-        <td align="center" class="td-form">&nbsp;</td>
-        <td align="left" class="td-form"><input type="submit" name="Submit" value="Submit" class="btn1">
-          <input name="id" type="hidden" id="id">
-          <input name="op" type="hidden" id="op"></td>
-      </tr>
-    </tbody></table>
-  </form>
-  </fieldset>
-  <br>
-  <table width="100%" border="0" cellpadding="0" cellspacing="1" class="tbl1">
-    <tbody><tr class="headM link-top">
-      <th width="56" align="center">Sn.</th>
-      <th width="183" align="left" valign="top">Name</th>
-      <th width="184" align="left" valign="top">Description</th>
-      <th width="308" align="center">Edit</th>
-     <!-- <th width="252" align="center">Show in Templates</th>-->
-      <!--<th>Middle Name</th>-->
-      <th width="223" align="center" style="width: 100px;">Delete</th>
-      <th width="103" align="center" nowrap="nowrap" style="width: 100px;">Use as SMS</th>
-    </tr>
-        <tr align="center" style="font-weight:normal" class="tablebgHeadingrow">
-      <td align="center">1</td>
-      <td align="left" valign="top">Manish</td>
-      <td align="left" valign="top">test from gap infotech&nbsp;</td>
-      <td align="center">
-	  <a href="http://localhost/kanhaiya/SMS%20panel/online/edit_template.php?op=temp_edit&amp;tid=12"> <img src="<?php echo base_url()?>assets/images/edit.gif" border="0"> </a>
-	 <!--<a href="javascript:void(0)" onClick="showaddedit('edit', '< ?=$fetch1->id?>', '< ?=$fetch1->name?>' , '< ?=$fetch1->sdescription?>')" class="link-table"> <img src="admin/images/edit.gif" border="0" alt="Click here to edit the Member" title="Click here to edit the Member"> </a>--> </td>
-            <td align="center"><a href="http://localhost/kanhaiya/SMS%20panel/online/sms_tpl.php?id=12&amp;op=del" class="link-table" onclick="return confirm(&#39;Are you sure, want to delete this record&#39;);"> <img src="<?php echo base_url()?>assets/images/del.gif" width="16" height="16" border="0"> </a> </td>
-      <td align="center">
-	  
-	  	  <a href="http://localhost/kanhaiya/SMS%20panel/online/compose.php?temp_id=12&amp;temp_op=teop" class="link-table"> <img src="<?php echo base_url()?>assets/images/edit.gif" width="12" height="12" border="0"> </a>
-	 	  </td>
-    </tr>
-      </tbody></table>
+<div class="row">
+	<div class="col-md-12">
+		<div class="content-box-large">
+			<div class="panel-body">
+				<?php if($this->session->flashdata('template_errors')){ ?>
+				<div class="alert alert-danger alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<?php echo $this->session->flashdata('template_errors'); ?>
+				</div>
+				<?php } ?>
+				<?php if($this->session->flashdata('template_success')){ ?>
+				<div class="alert alert-success alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<?php echo $this->session->flashdata('template_success'); ?>
+				</div>
+				<?php } ?>
+				<h1>Manage Templates</h1>
+				<div class="link-group1">
+					<a data-toggle="collapse" href="#addtemplatecollapse" aria-expanded="false" >Add New </a>
+				</div>		
+				<!--Add Template-->
+				<div class="collapse" id="addtemplatecollapse">
+				  <?php echo form_open('userdashboard/add_new_template'); ?>
+				  <div class="row">
+					<div class="col-md-12">
+						<input type="text" class="form-control" name="template_name" required value="" placeholder="Name" />
+					</div><div class="col-md-12"><br/></div>
+					<div class="col-md-12">
+						<textarea name="template_description" class="form-control" required placeholder="Description" ></textarea>
+					</div><div class="col-md-12"><br/></div>
+					<div class="col-md-10"></div>
+					<div class="col-md-2"><input class="btn btn-primary" type="submit" name="addtemplate" value="Add" /> &nbsp;<input class="btn btn-default" data-toggle="collapse" href="#addtemplatecollapse" type="button" value="Cancel" /></div>
+				  </div>
+				  <?php echo form_close(); ?>
+				</div>
+				
+				<!--Edit Notification-->
+				<div class="collapse" id="edittemplatecollapse">
+				  <?php echo form_open('userdashboard/edit_template'); ?>
+				  <div class="row">
+					<div class="col-md-12">
+						<input type="text" class="form-control" name="template_name" id="template_name" required value="" placeholder="Name" />
+					</div><div class="col-md-12"><br/></div>
+					<div class="col-md-12">
+						<textarea name="template_description" class="form-control" id="template_description" required placeholder="Description" ></textarea>
+					</div><div class="col-md-12"><br/></div>
+					<div class="col-md-10"><input type="hidden" name="template_id" id="template_id" value="" /></div>
+					<div class="col-md-2"><input class="btn btn-primary" type="submit" name="edittemplate" value="Edit" /> &nbsp;<input class="btn btn-default" data-toggle="collapse" href="#edittemplatecollapse" type="button" value="Cancel" /></div>
+				  </div>
+				  <?php echo form_close(); ?>
+				</div>
+				<div class="col-md-12"><hr/></div>
+				<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="templates_table">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Description</th>
+							<th>Edit</th>
+							<th>Delete</th>
+							<th>Use As SMS</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+							foreach($templates as $item) {
+								echo '<tr>';
+								echo '<td>'.$item['name'].'</td>';
+								echo '<td>'.$item['description'].'</td>';
+								echo '<td><a href="#" onclick="show_edittemplate_collapse(this)" data-name="'.$item['name'].'" data-description ="'.$item['description'].'" data-id ="'.$item['id'].'" ><img src="'.base_url().'assets/images/edit.gif" alt="edit" width="12" height="12"></a></td>';
+								echo '<td><a href="'.base_url().'userdashboard/delete_template/'.$item['id'].'" onclick="return confirm(\'Are you Sure Want To Delete This Template\')" class="style1"><b><font color="#339933" size="2"><img src="'.base_url().'assets/images/del.gif" width="12" height="12" border="0" class="text12"></font></b></a></td>';
+								echo '<td><a href="#" onclick="use_sms_content(\''.$item['description'].'\')" data-name="'.$item['name'].'" data-description ="'.$item['description'].'" data-id ="'.$item['id'].'" ><img src="'.base_url().'assets/images/edit.gif" alt="edit" width="12" height="12"></a></td>';
+								echo '</tr>';
+							}
+						?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 </div>
-<script language="javascript">
-
-
-
-function showaddedit(oper, id, name,con){
- 
-document.getElementById('addaward').style.display='block';
-
-
-
-	if(oper=='edit'){
-
-
-
-		document.getElementById('id').value=id;
-		document.getElementById('name').value=name;
- 		document.getElementById('con').value=con;
-  		document.getElementById('op').value="edit";
-
-
-
-	}else{
-
-
-
-		document.getElementById('id').value='';
-
- 		document.getElementById('name').value='';
-
- 		document.getElementById('con').value='';
-		
-  		document.getElementById('op').value="add";
-
-
-
-	}
-
-
-
-}
-
-
-
-
-
-
-
-function validate()
-
-
-
-{
-
-
-
-	if(document.kcr_constant.name.value=='')
-
-
-
-	{
-
-
-
-		alert("Please Enter  name");
-
-
-
-		document.kcr_constant.name.focus();
-
-
-
-		return false;
-
-
-
-	}
-
-
-
-	 
-
-
-
-}
-
-
-
-</script>
-
-
-</div>
-<div style="clear:both">&nbsp;</div>

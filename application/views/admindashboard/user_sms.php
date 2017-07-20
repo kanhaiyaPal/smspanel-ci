@@ -31,12 +31,13 @@
 								echo '<td>'.$item['name'].'</td>';
 								echo '<td>'.$item['text'].'</td>';
 								echo '<td>'.$item['date_time'].'</td>';
-								echo '<td>'.$item['file'].'</td>';
+								echo '<td><a href="'.base_url().'uploads/contacts/'.$item['org_file'].'">'.$item['file_title'].'</a></td>';
 								echo '<td><a href="#" data-toggle="modal" data-target="#showdetailusersms" 
 								data-name="'.$item['name'].'" 
-								data-text ="'.$item['text'].'" 
+								data-smstext ="'.$item['text'].'" 
 								data-date ="'.$item['date_time'].'" 
-								data-file ="'.$item['file'].'"
+								data-file ="'.$item['file_title'].'"
+								data-filename ="'.$item['org_file'].'"
 								><img src="'.base_url().'assets/images/edit.gif" alt="edit" width="12" height="12"></a> &nbsp;&nbsp;&nbsp;&nbsp;
 								<a href="'.base_url().'admindashboard/delete_usersms/'.$item['id'].'" onclick="return confirm(\'Are you Sure Want To Delete?\')" class="style1"><b><font color="#339933" size="2"><img src="'.base_url().'assets/images/del.gif" width="12" height="12" border="0" class="text12"></font></b></a> &nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="mass_updusms[]" id="checkbox[]" value="'.$item['id'].'">
 								</td>';
@@ -66,9 +67,9 @@
       </div>
       <div class="modal-body">
 		<div class="row">
-			<div class="col-md-4">Name :</div><div class="col-md-6"><input type="text" disabled value="" id="user_name_usersms" /></div>
-			<div class="col-md-4">Text :</div><div class="col-md-6"><input type="text" disabled value="" id="user_text_usersms" /></div>
-			<div class="col-md-4">Date/Time :</div><div class="col-md-6"><input type="text" disabled value="" id="user_date_usersms" /></div>
+			<div class="col-md-4">Name :</div><div class="col-md-6"><input class="form-control" type="text" disabled value="" id="user_name_usersms" /></div>
+			<div class="col-md-4">Text :</div><div class="col-md-6"><textarea class="form-control" disabled id="user_text_usersms" /></textarea></div>
+			<div class="col-md-4">Date/Time :</div><div class="col-md-6"><input class="form-control" type="text" disabled value="" id="user_date_usersms" /></div>
 			<div class="col-md-4">Contact File :</div><div class="col-md-6"><a id="user_file_usersms" href="" target="_blank"></a></div>
 		</div>
       </div>

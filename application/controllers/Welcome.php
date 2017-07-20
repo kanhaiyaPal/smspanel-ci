@@ -97,6 +97,15 @@ class Welcome extends CI_Controller {
 				if($this->authentication->verify_pass($this->input->post('lpassword'),$user_valid['password']))
 				{
 					$user_data = $this->authentication->get_userdata($user_valid['uid']);
+					/*validity check*/
+					if($user_data['user_type']!= '1'){
+						$today = date('d-m-Y');
+						if(strtotime($today) > strtotime($user_data['expiry_date']))
+						{
+							$this->session->set_flashdata('login_error', 'Validity Expired');
+							redirect(base_url(),'refresh');
+						}
+					}
 					$this->authentication->generate_sessions($user_data);	
 					redirect(base_url(),'refresh');
 				}else{
