@@ -14,7 +14,8 @@
     <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<?php echo base_url(); ?>assets/js/bootstrap/bootstrap.min.js"></script>
-	<script src="<?php echo base_url(); ?>assets/vendors/datatables/js/jquery.dataTables.min.js"></script>
+	<!--<script src="<?php echo base_url(); ?>assets/vendors/datatables/js/jquery.dataTables.min.js"></script>-->
+	<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js" ></script>
     <script src="<?php echo base_url(); ?>assets/vendors/datatables/dataTables.bootstrap.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0-RC1/js/bootstrap-datepicker.js"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0-RC1/css/bootstrap-datepicker.css" rel="stylesheet" />
@@ -26,8 +27,12 @@
 		
 		$('#templates_table').dataTable({ "bFilter": false });
 		$('#contactsdata_table').dataTable({ "bFilter": false });
-		$('#smshistory_user_table').dataTable();
+		var smshisttable= $('#smshistory_user_table').DataTable();
 		$('#userreports_table').dataTable();
+		
+		$('#filter_history_bydate').change(function() {
+			smshisttable.columns( 3 ).search( this.value ).draw();
+		});
 		
 		<?php 
 			if(isset($unreads)):
@@ -95,6 +100,11 @@
 			autoclose: true
 		});
 		
+		$('#filter_history_bydate').datepicker({
+			format: 'dd-mm-yyyy',
+			autoclose: true
+		});
+		
 		var start_bt_date = '';
 		var dt = new Date();
 		var cur_hrs = dt.getHours();
@@ -116,6 +126,7 @@
 		});
 
 	});
+	
 	
 	function remove_morning_slot(is_change)
 	{
@@ -158,6 +169,35 @@
 	<?php if(strtolower($this->uri->segment(1)) == 'admindashboard'): ?>
 	
 	<script>
+	function clear_filters_usersms()
+	{
+		//$('#usersms_table').DataTable();
+		$('#admin_filter_bydate').val('');
+		$('#admin_filter_username').val('');
+		$('#usersms_table').DataTable().columns( 0 ).search( '' ).draw();
+		$('#usersms_table').DataTable().columns( 2 ).search( '' ).draw();
+	}
+	function filter_usersms_table(table)
+	{
+		var date = $('#admin_filter_bydate').val();
+		var select = $('#admin_filter_username').val();
+		if(select == ''){
+			if(date != '')
+			{
+				table.columns( 2 ).search( date ).draw();
+			}
+		}
+		if(date == ''){
+			if(select != '')
+			{
+				table.columns( 0 ).search( select ).draw();
+			}
+		}
+		if((select != '') && (date != ''))
+		{
+			table.columns( 0 ).search( select ).columns( 2 ).search( date ).draw();
+		}
+	}
 	$(document).ready(function() {
 
 		$('.datepicker').datepicker({
@@ -166,20 +206,35 @@
 				autoclose: true
 		});
 		
+		$('#admin_filter_bydate').datepicker({
+				format: 'dd-mm-yyyy',
+				autoclose: true
+		});
+		
 		$('.report_date').datepicker({
 				format: 'dd-mm-yyyy',
 				autoclose: true
 		});
 		
+			
 		$('#usertable').dataTable();
 		$('#registerenquiry').dataTable();
 		$('#resellertable').dataTable();
 		$('#notification_table').dataTable();
 		$('#smsideas_table').dataTable();
 		$('#offers_table').dataTable();
-		$('#usersms_table').dataTable();
+		var usersmsadtable = $('#usersms_table').DataTable();
 		$('#balances_table').dataTable();
 		$('#reports_table').dataTable();
+		
+		/*Filter Data*/
+		$('div#usersms_table_filter').hide();
+		$('#admin_filter_bydate').change(function() {
+			filter_usersms_table(usersmsadtable);
+		});
+		$('#admin_filter_username').change(function() {
+			filter_usersms_table(usersmsadtable);
+		});
 		
 		$('#registeruser').on('shown.bs.modal', function (event) {
 			  $('#register_user_form')[0].reset();

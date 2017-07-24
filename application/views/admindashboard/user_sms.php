@@ -13,6 +13,22 @@
 					<?php echo $this->session->flashdata('usersms_success'); ?>
 				</div>
 				<?php } ?>
+				<table class="table table-striped table-bordered">
+					<tr>
+						<td>Filter By User</td>
+						<td>
+							<select class="form-control" id="admin_filter_username">
+								<option value="">Please Select User</option>
+								<?php foreach($users_st as $user):?>
+								<option value="<?php echo $user['name']; ?>"><?php echo $user['name']; ?></option>
+								<?php endforeach; ?>
+							</select>
+						</td>
+						<td>Filter By Date:</td>
+						<td><input type="text" id="admin_filter_bydate" class="form-control filter_date_smshistory" value="" /></td>
+						<td><input type="button" onclick="clear_filters_usersms()" class="btn btn-primary" value="Clear" /> </td>
+					</tr>
+				</table>
 				<?php echo form_open('admindashboard/delete_bulk_usersms'); ?>				
 				<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="usersms_table">
 					<thead>
@@ -38,7 +54,7 @@
 								data-date ="'.$item['date_time'].'" 
 								data-file ="'.$item['file_title'].'"
 								data-filename ="'.$item['org_file'].'"
-								><img src="'.base_url().'assets/images/edit.gif" alt="edit" width="12" height="12"></a> &nbsp;&nbsp;&nbsp;&nbsp;
+								><img src="'.base_url().'assets/images/view.gif" alt="view" width="12" height="12"></a> &nbsp;&nbsp;&nbsp;&nbsp;
 								<a href="'.base_url().'admindashboard/delete_usersms/'.$item['id'].'" onclick="return confirm(\'Are you Sure Want To Delete?\')" class="style1"><b><font color="#339933" size="2"><img src="'.base_url().'assets/images/del.gif" width="12" height="12" border="0" class="text12"></font></b></a> &nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="mass_updusms[]" id="checkbox[]" value="'.$item['id'].'">
 								</td>';
 								echo '</tr>';

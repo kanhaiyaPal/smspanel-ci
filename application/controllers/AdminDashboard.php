@@ -56,6 +56,7 @@ class AdminDashboard extends CI_Controller {
 		
 		/*User SMS Data*/
 		$this->load->model('usersms');
+		$this->load->model('updatebalance');
 		$this->load->model('contact');
 		$show_data = array();
 		$raw_data = $this->usersms->get_usersms();
@@ -71,12 +72,11 @@ class AdminDashboard extends CI_Controller {
 			);
 		}
 		$smsdata['smsdata'] = $show_data;
-		
+		$smsdata['users_st'] = $this->updatebalance->users_list();
 		$data['usersms'] = $this->load->view('admindashboard/user_sms',$smsdata, TRUE);
 		
 		/*Update Balance Data*/
-		$this->load->model('updatebalance');
-		
+				
 		$balances_array = array();
 		$all_balc = $this->updatebalance->get_balance();
 		foreach($all_balc as $si_bal)
