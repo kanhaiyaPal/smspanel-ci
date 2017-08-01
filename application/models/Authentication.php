@@ -99,7 +99,7 @@ class Authentication extends CI_Model {
 		return false;
 	}
 	
-	public function logout_current_user()
+	public function logout_current_user($from_admin = FALSE)
 	{
 		$is_loged = $this->logged_in_status();
 		if($is_loged){
@@ -113,8 +113,11 @@ class Authentication extends CI_Model {
 			if($this->session->has_userdata('user_session')){
 				$this->session->unset_userdata('user_session');
 			}
-			
-			redirect(base_url());
+			if($from_admin){
+				return true;
+			}else{
+				redirect(base_url());
+			}
 		}
 	}
 }

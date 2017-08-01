@@ -7,15 +7,14 @@ class UserDashboard extends CI_Controller {
     {
 		parent::__construct();
 		$this->load->model('authentication');
+		
+		if((!$this->authentication->logged_in_status()) && (!$this->session->has_userdata('user_session'))){
+			redirect(base_url());
+		}
 	}
 	
 	public function index($page = '')
 	{
-
-		if((!$this->authentication->logged_in_status()) && (!$this->session->has_userdata('user_session'))){
-			redirect(base_url());
-		}
-		
 		if($page == 'notification')
 		{
 			$data['pageset'] = 'notification';
@@ -143,13 +142,13 @@ class UserDashboard extends CI_Controller {
 		if ($this->form_validation->run() == FALSE){
 			
 			$this->session->set_flashdata('dashboard_error', validation_errors());
-			redirect(base_url().'userdashboard','refresh');
+			redirect(base_url().'userdashboard#dashboard','refresh');
 		}
 		else{
 			$this->load->model('dashboard');
 			$this->dashboard->modify_user();
 			$this->session->set_flashdata('dashboard_success', 'User Information Modified Successfully');
-			redirect(base_url().'userdashboard','refresh');
+			redirect(base_url().'userdashboard#dashboard','refresh');
 		}
 	}
 	
@@ -173,12 +172,12 @@ class UserDashboard extends CI_Controller {
 		
 		if ($this->form_validation->run() == FALSE){
 			$this->session->set_flashdata('dashboard_error', validation_errors());
-			redirect(base_url().'userdashboard','refresh');
+			redirect(base_url().'userdashboard#dashboard','refresh');
 		}else{
 			$this->load->model('dashboard');
 			$this->dashboard->update_password();
 			$this->session->set_flashdata('dashboard_success', 'Password Changed Successfully');
-			redirect(base_url().'userdashboard','refresh');
+			redirect(base_url().'userdashboard#dashboard','refresh');
 		}
 	}
 	
@@ -197,12 +196,12 @@ class UserDashboard extends CI_Controller {
 		
 		if ($this->form_validation->run() == FALSE){
 			$this->session->set_flashdata('template_error', validation_errors());
-			redirect(base_url().'userdashboard','refresh');
+			redirect(base_url().'userdashboard#managetemplates','refresh');
 		}else{
 			$this->load->model('templates');
 			$this->templates->set_templates();
 			$this->session->set_flashdata('template_success', 'Template Added Successfully');
-			redirect(base_url().'userdashboard','refresh');
+			redirect(base_url().'userdashboard#managetemplates','refresh');
 		}
 	}
 	
@@ -215,12 +214,12 @@ class UserDashboard extends CI_Controller {
 		
 		if ($this->form_validation->run() == FALSE){
 			$this->session->set_flashdata('template_error', validation_errors());
-			redirect(base_url().'userdashboard','refresh');
+			redirect(base_url().'userdashboard#managetemplates','refresh');
 		}else{
 			$this->load->model('templates');
 			$this->templates->set_templates($this->input->post('template_id'));
 			$this->session->set_flashdata('template_success', 'Template Updated Successfully');
-			redirect(base_url().'userdashboard','refresh');
+			redirect(base_url().'userdashboard#managetemplates','refresh');
 		}
 	}
 	
@@ -230,7 +229,7 @@ class UserDashboard extends CI_Controller {
 			$this->load->model('templates');
 			$this->templates->delete_templates($id);
 			$this->session->set_flashdata('template_success', 'Template Deleted Successfully');
-			redirect(base_url().'userdashboard','refresh');
+			redirect(base_url().'userdashboard#managetemplates','refresh');
 		}
 	}
 	
@@ -243,12 +242,12 @@ class UserDashboard extends CI_Controller {
 		
 		if ($this->form_validation->run() == FALSE){
 			$this->session->set_flashdata('contact_error', validation_errors());
-			redirect(base_url().'userdashboard','refresh');
+			redirect(base_url().'userdashboard#uploadcontact','refresh');
 		}else{
 			$this->load->model('contact');
 			$this->contact->set_contact();
 			$this->session->set_flashdata('contact_success', 'Contact Saved Successfully');
-			redirect(base_url().'userdashboard','refresh');
+			redirect(base_url().'userdashboard#uploadcontact','refresh');
 		}
 	}
 	
@@ -258,7 +257,7 @@ class UserDashboard extends CI_Controller {
 			$this->load->model('contact');
 			$this->contact->delete_contact($id);
 			$this->session->set_flashdata('contact_success', 'Contact Deleted Successfully');
-			redirect(base_url().'userdashboard','refresh');
+			redirect(base_url().'userdashboard#uploadcontact','refresh');
 		}
 	}
 	
@@ -274,12 +273,12 @@ class UserDashboard extends CI_Controller {
 		
 		if ($this->form_validation->run() == FALSE){
 			$this->session->set_flashdata('compose_error', validation_errors());
-			redirect(base_url().'userdashboard','refresh');
+			redirect(base_url().'userdashboard#composesms','refresh');
 		}else{
 			$this->load->model('usersms');
 			$this->usersms->set_usersms();
-			$this->session->set_flashdata('compose_success', 'SMS Saved Successfully');
-			redirect(base_url().'userdashboard','refresh');
+			$this->session->set_flashdata('compose_success', 'SMS Sent Successfully');
+			redirect(base_url().'userdashboard#composesms','refresh');
 		}
 	}
 	
@@ -328,12 +327,12 @@ class UserDashboard extends CI_Controller {
 		$this->form_validation->set_rules('report_request_period', 'Report Date', 'trim|required');
 		if ($this->form_validation->run() == FALSE){
 			$this->session->set_flashdata('userreport_error', validation_errors());
-			redirect(base_url().'userdashboard','refresh');
+			redirect(base_url().'userdashboard#report','refresh');
 		}else{
 			$this->load->model('reports');
 			$this->reports->notify_admin();
 			$this->session->set_flashdata('userreport_success', 'Request Sent Successfully');
-			redirect(base_url().'userdashboard','refresh');
+			redirect(base_url().'userdashboard#report','refresh');
 		}
 	}
 }

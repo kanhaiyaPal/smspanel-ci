@@ -89,7 +89,7 @@ body {
 	background-position: left 155px;
 	width: 969px;
 	padding-top: 155px;
-	height: 360px;
+	height: 534px;
 }
 h1 {
 	text-decoration: none;
@@ -116,8 +116,8 @@ h2 {
 
 .home_login {
 	background-image: url(../images/login.jpg);
-	height: 135px;
-	width: 264px;
+	width: 334px;
+	min-height:305px;
 	color: #185B88;
 	font-weight: bold;
 	text-decoration: none;
@@ -137,15 +137,12 @@ h2 {
 	text-decoration: underline;
 }
 #h_footer {
-	text-align: left;
-	padding-bottom: 10px;
-	padding-top: 10px;
-	height: 18px;
-	width: 100%;
-	background-image: url(../images/bg1.jpg);
-	border-top-width: 1px;
-	border-top-style: solid;
-	border-top-color: #2680a9;
+    text-align: left;
+    padding-bottom: 10px;
+    background-color: #154F74;
+    padding-top: 10px;
+    height: 18px;
+    width: 100%;
 }
 #h_footer  a {
 	color: #FFFFFF;

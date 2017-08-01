@@ -25,7 +25,8 @@ class Updatebalance extends CI_Model {
 		//update in user table
 		$this->load->model('userlist');
 		$user_data = $this->userlist->get_users((int)$this->input->post('balance_user_id'));
-		$newbalance = ((int)$user_data['current_credits'] + (int)$this->input->post('balance_sms_count'));
+		//$newbalance = ((int)$user_data['current_credits'] + (int)$this->input->post('balance_sms_count'));
+		$newbalance = (int)$this->input->post('balance_sms_count');
 		$this->db->where('id', (int)$this->input->post('balance_user_id'));
         $this->db->update('users', array('current_credits' => $newbalance));
 		
@@ -61,5 +62,13 @@ class Updatebalance extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->delete('sms');
     }
-
+	
+	public function get_current_balance($userid = 0)
+	{
+		if($userid){
+			$query = $this->db->get_where('users',array('id' => $userid));
+			$r_user = $query->row_array();
+			return $r_user['current_credits'];
+		}
+	}
 }

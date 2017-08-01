@@ -57,8 +57,9 @@
 											data-totalcredit = "'.$item['total_credits'].'"
 											data-currentcredit = "'.$item['current_credits'].'"
 									><img src="'.base_url().'assets/images/edit.gif" alt="edit" width="12" height="12"></a></td>
-									<td><a href="'.base_url().'admindashboard/delete_user/'.$item['id'].'" onclick="return confirm(\'Are you Sure Want To Delete This Member Information\')" class="style1"><b><font color="#339933" size="2"><img src="'.base_url().'assets/images/del.gif" width="12" height="12" border="0" class="text12"></font></b></a></td>
-									<td><a href="'.base_url().'admindashboard/change_status/'.$item['id'].'/'.$new_val.'"><b><img src="'.base_url().'assets/images/'.$icon_sh.'.gif" width="12" height="12" border="0" class="text12"></b></a></td>
+									<td><a title="Delete" href="'.base_url().'admindashboard/delete_user/'.$item['id'].'" onclick="return confirm(\'Are you Sure Want To Delete This Member Information\')" class="style1"><b><font color="#339933" size="2"><img src="'.base_url().'assets/images/del.gif" width="12" height="12" border="0" class="text12"></font></b></a></td>
+									<td><a title="Activate/Deactivate" href="'.base_url().'admindashboard/change_status/'.$item['id'].'/'.$new_val.'"><b><img src="'.base_url().'assets/images/'.$icon_sh.'.gif" width="12" height="12" border="0" class="text12"></b></a></td>
+									<td><a title="Login as this user" href="'.base_url().'admindashboard/loggin_as_user/'.$item['id'].'" onclick="return confirm(\'Are you Sure Want To Login as this memeber. You will be logged out as admin.\')" class="style1"><img src="'.base_url().'assets/images/about.gif" alt="edit" width="12" height="12"></a></td>
 									<td><input type="checkbox" name="mass_upd[]" id="checkbox[]" value="'.$item['id'].'"></td>
 									</tr></table>';
 									echo '</td>';

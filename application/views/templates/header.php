@@ -54,6 +54,7 @@
               </form>
 			  <?php else: ?>
 				<a class="btn btn-primary" href="<?php echo $dashboard_link; ?>">Go to Dashboard</a>
+				<a class="btn btn-default" href="<?php echo $logout_link; ?>">Logout</a>
 			  <?php endif; ?>
             </div></td>
         </tr>

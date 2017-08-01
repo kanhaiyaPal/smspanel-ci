@@ -69,7 +69,7 @@
 								data-description ="'.$item['description'].'" 
 								data-id ="'.$item['id'].'" 
 								><img src="'.base_url().'assets/images/edit.gif" alt="edit" width="12" height="12"></a> &nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="'.base_url().'admindashboard/delete_user/'.$item['id'].'" onclick="return confirm(\'Are you Sure Want To Delete This Member Information\')" class="style1"><b><font color="#339933" size="2"><img src="'.base_url().'assets/images/del.gif" width="12" height="12" border="0" class="text12"></font></b></a>
+								<a href="'.base_url().'admindashboard/delete_notification/'.$item['id'].'" onclick="return confirm(\'Are you Sure Want To delete this?\')" class="style1"><b><font color="#339933" size="2"><img src="'.base_url().'assets/images/del.gif" width="12" height="12" border="0" class="text12"></font></b></a>
 								</td>';
 								echo '</tr>';
 							}

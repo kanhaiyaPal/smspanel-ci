@@ -7,14 +7,14 @@ class AdminDashboard extends CI_Controller {
     {
 		parent::__construct();
 		$this->load->model('authentication');
+		
+		if((!$this->authentication->logged_in_status()) && (!$this->session->has_userdata('admin_session'))){
+			redirect(base_url());
+		}
 	}
 
 	public function index()
 	{	
-		if((!$this->authentication->logged_in_status()) && (!$this->session->has_userdata('admin_session'))){
-			redirect(base_url());
-		}
-		
 		if ( ! file_exists(APPPATH.'views/admin_dashboard.php'))
         {
 			show_404();
@@ -235,6 +235,24 @@ class AdminDashboard extends CI_Controller {
 			}
 		}
 	}
+	
+	public function loggin_as_user($userid = 0)
+	{
+		if($userid){
+			if($userid != 9)
+			{
+				$user_dt = $this->authentication->get_userdata($userid);
+				if(count($user_dt) > 0){
+					$this->authentication->logout_current_user(true);
+					$this->authentication->generate_sessions($user_dt);
+				}else{
+					exit('User Not found!!');
+				}
+			}else{
+				exit('Login as Admin is not allowed');
+			}
+		}
+	}
 	/*=======User List Functions end==========*/
 	
 	/*=======Registration Funtions============*/
@@ -245,7 +263,7 @@ class AdminDashboard extends CI_Controller {
 			$this->register->delete_entry((int)$id);
 			
 			$this->session->set_flashdata('admindash_success', 'Entry Deleted Successfully');
-			redirect(base_url().'admindashboard','refresh');
+			redirect(base_url().'admindashboard#registration','refresh');
 		}
 	}
 	
@@ -259,7 +277,7 @@ class AdminDashboard extends CI_Controller {
 			}
 			
 			$this->session->set_flashdata('admindash_success', 'Entries Deleted Successfully');
-			redirect(base_url().'admindashboard','refresh');
+			redirect(base_url().'admindashboard#registration','refresh');
 		}		
 	}
 	
@@ -277,12 +295,12 @@ class AdminDashboard extends CI_Controller {
 		if ($this->form_validation->run() == FALSE){
 			
 			$this->session->set_flashdata('notify_errors', validation_errors());
-			redirect(base_url().'admindashboard','refresh');
+			redirect(base_url().'admindashboard#notification','refresh');
 		}else{
 			$this->notification->set_notifications();
 			
 			$this->session->set_flashdata('notify_success','Notification Created Successfully');
-			redirect(base_url().'admindashboard','refresh');
+			redirect(base_url().'admindashboard#notification','refresh');
 		}
 	}
 	
@@ -295,7 +313,7 @@ class AdminDashboard extends CI_Controller {
 			$this->notification->set_notifications($nid);
 			
 			$this->session->set_flashdata('notify_success','Notification Edited Successfully');
-			redirect(base_url().'admindashboard','refresh');
+			redirect(base_url().'admindashboard#notification','refresh');
 		}
 	}
 	
@@ -306,7 +324,7 @@ class AdminDashboard extends CI_Controller {
 			$this->notification->delete_notifications($id);
 			
 			$this->session->set_flashdata('notify_success','Notification Deleted Successfully');
-			redirect(base_url().'admindashboard','refresh');
+			redirect(base_url().'admindashboard#notification','refresh');
 		}
 	}
 	/*======Notifications Funtions ends========*/
@@ -324,12 +342,12 @@ class AdminDashboard extends CI_Controller {
 		if ($this->form_validation->run() == FALSE){
 			
 			$this->session->set_flashdata('offer_errors', validation_errors());
-			redirect(base_url().'admindashboard','refresh');
+			redirect(base_url().'admindashboard#offers','refresh');
 		}else{
 			$this->smsoffers->set_mixed_data(0,'offer');
 			
 			$this->session->set_flashdata('offer_success','Offer Created Successfully');
-			redirect(base_url().'admindashboard','refresh');
+			redirect(base_url().'admindashboard#offers','refresh');
 		}
 	}
 	
@@ -342,7 +360,7 @@ class AdminDashboard extends CI_Controller {
 			$this->smsoffers->set_mixed_data($oid,'offer');
 			
 			$this->session->set_flashdata('offer_success','Offer Edited Successfully');
-			redirect(base_url().'admindashboard','refresh');
+			redirect(base_url().'admindashboard#offers','refresh');
 		}
 	}
 	
@@ -353,7 +371,7 @@ class AdminDashboard extends CI_Controller {
 			$this->smsoffers->delete_mixed_data($id);
 			
 			$this->session->set_flashdata('offer_success','Offer Deleted Successfully');
-			redirect(base_url().'admindashboard','refresh');
+			redirect(base_url().'admindashboard#offers','refresh');
 		}
 	}
 	/*=======Offers Funtions Ends============*/
@@ -371,12 +389,12 @@ class AdminDashboard extends CI_Controller {
 		if ($this->form_validation->run() == FALSE){
 			
 			$this->session->set_flashdata('sms_errors', validation_errors());
-			redirect(base_url().'admindashboard','refresh');
+			redirect(base_url().'admindashboard#smsidea','refresh');
 		}else{
 			$this->smsoffers->set_mixed_data();
 			
 			$this->session->set_flashdata('sms_success','SMS Idea Created Successfully');
-			redirect(base_url().'admindashboard','refresh');
+			redirect(base_url().'admindashboard#smsidea','refresh');
 		}
 	}
 	
@@ -389,7 +407,7 @@ class AdminDashboard extends CI_Controller {
 			$this->smsoffers->set_mixed_data($sid);
 			
 			$this->session->set_flashdata('sms_success','SMS Idea Edited Successfully');
-			redirect(base_url().'admindashboard','refresh');
+			redirect(base_url().'admindashboard#smsidea','refresh');
 		}
 	}
 	
@@ -400,7 +418,7 @@ class AdminDashboard extends CI_Controller {
 			$this->smsoffers->delete_mixed_data($id);
 			
 			$this->session->set_flashdata('sms_success','SMS Idea Deleted Successfully');
-			redirect(base_url().'admindashboard','refresh');
+			redirect(base_url().'admindashboard#smsidea','refresh');
 		}
 	}
 	
@@ -415,7 +433,7 @@ class AdminDashboard extends CI_Controller {
 			$this->usersms->delete_usersms($id);
 			
 			$this->session->set_flashdata('usersms_success','User SMS Deleted Successfully');
-			redirect(base_url().'admindashboard','refresh');
+			redirect(base_url().'admindashboard#usersms','refresh');
 		}
 	}
 	
@@ -429,7 +447,7 @@ class AdminDashboard extends CI_Controller {
 			}
 			
 			$this->session->set_flashdata('usersms_success','User SMS Deleted Successfully');
-			redirect(base_url().'admindashboard','refresh');
+			redirect(base_url().'admindashboard#usersms','refresh');
 		}
 	}
 	/*=======User SMS Funtions Ends=========*/
@@ -446,12 +464,22 @@ class AdminDashboard extends CI_Controller {
 		if ($this->form_validation->run() == FALSE){
 			
 			$this->session->set_flashdata('balance_errors', validation_errors());
-			redirect(base_url().'admindashboard','refresh');
+			redirect(base_url().'admindashboard#updatebalance','refresh');
 		}else{
 			$this->updatebalance->set_balance();
 			
 			$this->session->set_flashdata('balance_success','Balance Updated Successfully');
-			redirect(base_url().'admindashboard','refresh');
+			redirect(base_url().'admindashboard#updatebalance','refresh');
+		}
+	}
+	
+	public function get_current_balance($user_id = FALSE)
+	{
+		if($user_id){
+			$this->load->model('updatebalance');
+			$current_balance = $this->updatebalance->get_current_balance($user_id);
+			echo (int)$current_balance;
+			exit;
 		}
 	}
 	
@@ -469,12 +497,12 @@ class AdminDashboard extends CI_Controller {
 		if ($this->form_validation->run() == FALSE){
 			
 			$this->session->set_flashdata('report_errors', validation_errors());
-			redirect(base_url().'admindashboard','refresh');
+			redirect(base_url().'admindashboard#report','refresh');
 		}else{
 			$this->reports->set_report();
 			
 			$this->session->set_flashdata('report_success','Report Added Successfully');
-			redirect(base_url().'admindashboard','refresh');
+			redirect(base_url().'admindashboard#report','refresh');
 		}
 	}
 	
@@ -485,7 +513,7 @@ class AdminDashboard extends CI_Controller {
 			$this->reports->delete_report($id);
 			
 			$this->session->set_flashdata('report_success','Report Deleted Successfully');
-			redirect(base_url().'admindashboard','refresh');
+			redirect(base_url().'admindashboard#report','refresh');
 		}
 	}
 	/*=======Reports Funtions Ends ==========*/

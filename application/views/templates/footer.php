@@ -19,12 +19,26 @@
     <script src="<?php echo base_url(); ?>assets/vendors/datatables/dataTables.bootstrap.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0-RC1/js/bootstrap-datepicker.js"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0-RC1/css/bootstrap-datepicker.css" rel="stylesheet" />
+	<script>
+		$(document).ready(function() {
+			// Javascript to enable link to tab
+			var url = document.location.toString();
+			if (url.match('#')) {
+				$('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+			} 
+
+			// Change hash for page-reload
+			$('.nav-tabs a').on('shown.bs.tab', function (e) {
+				window.location.hash = e.target.hash;
+			})
+		});
+	</script>
 	
 	<?php if(strtolower($this->uri->segment(1)) == 'userdashboard'): ?>
 	<script src="<?php echo base_url(); ?>assets/vendors/jqcounter/jquery.jqEasyCharCounter.min.js"></script>
 	<script>
 	$(document).ready(function() {
-		
+						
 		$('#templates_table').dataTable({ "bFilter": false });
 		$('#contactsdata_table').dataTable({ "bFilter": false });
 		var smshisttable= $('#smshistory_user_table').DataTable();
@@ -161,13 +175,13 @@
 		$('textarea#sms_txt').val('');
 		$('textarea#sms_txt').val(content);
 	}
+	
 	</script>
 	<style>
 	.table-condensed>tbody>tr>td,.table-condensed>thead>tr>th{ color:#000; }
 	</style> 
 	<?php endif; ?>
 	<?php if(strtolower($this->uri->segment(1)) == 'admindashboard'): ?>
-	
 	<script>
 	function clear_filters_usersms()
 	{
@@ -426,6 +440,19 @@
 		$('#offer_description').html(description);
 		
 		$('#editoffercollapse').collapse('toggle');
+	}
+	function get_user_credits(userid)
+	{
+		if(userid != ''){
+			$.ajax({
+				url: "<?php echo base_url(); ?>admindashboard/get_current_balance/"+userid, 
+				success: function(result){
+					$("#update_bl_curr_cr").val(result);
+				}
+			});
+		}else{
+			$("#update_bl_curr_cr").val('');
+		}
 	}
 	</script>
 	<style>

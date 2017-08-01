@@ -72,6 +72,21 @@ class Usersms extends CI_Model {
 			'file_id' => $file_id,
 		);
 		
+		$email_dt = array(
+			'content' => $this->input->post('sms_txt'),
+			'scheduled_on' => $this->input->post('sms_schedule'),
+			'time' => $this->input->post('sms_slot'),
+			'file_id' => $file_id,
+			'user_id' => $user_id,
+			'contact_count' => (int)$contacts_count
+		);
+		
+		$this->send_sms_mail($email_dt);
+		
+		if((int)$upd_crd <= 2){
+			$this->send_lowbalance_mail($email_dt);
+		}
+		
 		if ($id == 0) {
 			$this->db->insert('sms', $data);
 			return $this->db->insert_id();
@@ -165,5 +180,96 @@ class Usersms extends CI_Model {
 	public function get_numbers_count($file = FALSE)
 	{
 		return (substr_count(file_get_contents(UPLOAD_PATH_CONTACTS.$file), "\n")+1);
+	}
+	
+	private function send_sms_mail($req_data = array())
+	{
+		$this->load->library('email');
+		
+		$config['mailtype'] = 'html';
+
+		$this->email->initialize($config);
+
+		$user_email = $this->session->userdata('user_session')['email'];
+		$this->email->from(ADMIN_EMAIL, 'SMS Plus');
+		$this->email->to(ADMIN_EMAIL);
+		
+		$query = $this->db->get_where('contacts',array('id' => $req_data['file_id']));
+		$file_det = $query->row_array();
+		
+		$html_msg = '<table width="600"  border="0" cellspacing="0" cellpadding="15" style="border:solid 3px #0000CC; color:#333"><tr><td bgcolor="#0000FF"><a href="www.sms.smsplus.in/"><img src="'.base_url().'assets/images/logo1.png" alt="SMS Plus" /></a></td></tr><tr><td style="font-family:Arial, Helvetica, sans-serif; font-size:12px;"><table width="600"  border="0" cellspacing="0" cellpadding="15">';
+		$html_msg .= '<tr><td colspan="2">A new SMS has been scheduled by '.$this->session->userdata('user_session')['username'].'</td></tr>';
+		$html_msg .= '<tr>';
+		$html_msg .= '<td>File : </td><td>'.base_url().'uploads/contacts/'.$file_det['file_name'].'</td>';
+		$html_msg .= '</tr><tr>';
+		$html_msg .= '<td>SMS Content: </td><td>'.$req_data['content'].'</td>';
+		$html_msg .= '</tr><tr>';
+		$html_msg .= '<td>SMS Count: </td><td>'.$req_data['contact_count'].'</td>';
+		$html_msg .= '</tr><tr>';
+		$html_msg .= '<td>Scheduled On: </td><td>'.$req_data['scheduled_on'].'</td>';
+		$html_msg .= '</tr><tr>';
+		$html_msg .= '<td>Scheduled At: </td><td>'.$req_data['time'].'</td>';
+		$html_msg .= '</tr>';
+		$html_msg .= '<tr>
+					  <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px;"><br><br>
+						<p><strong>Warm Regards</strong></p>
+						<p style="font-size:14px; color:#0000FF"><strong>SMS Plus</strong></p><br>
+						Email:- sales@smsplus.in<br>
+						Mobile:- 9911560808<br>
+						Web:- <a href="www.sms.smsplus.in/">SMS Plus</a><br>
+					  </td>
+					</tr>';
+		$html_msg .= '</table></table>';
+		
+		$this->email->subject('New SMS Scheduled By '.$this->session->userdata('user_session')['username']);
+		$this->email->message($html_msg);
+		$this->email->attach(base_url().'uploads/contacts/'.$file_det['file_name']);
+
+		$this->email->send();
+		
+		return true;
+	}
+	
+	private function send_lowbalance_mail($req_data = array())
+	{
+		$this->load->library('email');
+		
+		$config['mailtype'] = 'html';
+
+		$this->email->initialize($config);
+
+		$user_email = $this->session->userdata('user_session')['email'];
+		$this->email->from(ADMIN_EMAIL, 'SMS Plus');
+		$this->email->to($user_email);
+		
+		$query = $this->db->get_where('users', array('id' => $req_data['user_id']));
+		$rm_info = $query->row_array();
+		
+		$html_msg = '<table width="600"  border="0" cellspacing="0" cellpadding="15" style="border:solid 3px #0000CC; color:#333"><tr><td bgcolor="#0000FF"><a href="www.sms.smsplus.in/"><img src="'.base_url().'assets/images/logo1.png" alt="SMS Plus" /></a></td></tr><tr><td style="font-family:Arial, Helvetica, sans-serif; font-size:12px;"><table width="600"  border="0" cellspacing="0" cellpadding="15">';
+		$html_msg .= '<tr><td colspan="2">It is a information that you have less than 2 SMS in your account. So Please recharge immediately or contact your relationship manage.<br></td></tr>';
+		$html_msg .= '<tr>';
+		$html_msg .= '<td>RM Name : </td><td>'.$rm_info['rm_name'].'</td>';
+		$html_msg .= '</tr><tr>';
+		$html_msg .= '<td>RM Phone: </td><td>'.$req_data['rm_contact'].'</td>';
+		$html_msg .= '</tr><tr>';
+		$html_msg .= '<td>RM Email: </td><td>'.$req_data['rm_email'].'</td>';
+		$html_msg .= '</tr>';
+		$html_msg .= '<tr>
+					  <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px;"><br><br>
+						<p><strong>Warm Regards</strong></p>
+						<p style="font-size:14px; color:#0000FF"><strong>SMS Plus</strong></p><br>
+						Email:- sales@smsplus.in<br>
+						Mobile:- 9911560808<br>
+						Web:- <a href="www.sms.smsplus.in/">SMS Plus</a><br>
+					  </td>
+					</tr>';
+		$html_msg .= '</table></table>';
+		
+		$this->email->subject('Action required - recharge your SMS Panel immediately"');
+		$this->email->message($html_msg);
+
+		$this->email->send();
+		
+		return true;
 	}
 }

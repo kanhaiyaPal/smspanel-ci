@@ -28,7 +28,7 @@
 				  <div class="col-md-12">
 					<div class="row">
 					  <div class="col-md-4">
-							<select name="balance_user_id" class="form-control" required>
+							<select name="balance_user_id" class="form-control" onchange="get_user_credits(this.value)" required>
 								<option value="">Please Select User</option>
 							<?php if(count($users) > 0): foreach($users as $user):?>
 								<option value="<?=$user['id']?>"><?=$user['name']?></option>
@@ -36,7 +36,7 @@
 							</select>
 						</div>
 						<div class="col-md-4">
-							<input type="text" name="balance_sms_count" pattern="\d*" class="form-control" required placeholder="Number of SMS" />
+							<input type="text" name="balance_sms_count" pattern="\d*" id="update_bl_curr_cr" class="form-control" required placeholder="Number of SMS" />
 						</div>
 						<div class="col-md-4"><input class="btn btn-primary" type="submit" name="addbalance" value="Add" /></div>
 					</div>
