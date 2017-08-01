@@ -120,4 +120,15 @@ class Authentication extends CI_Model {
 			}
 		}
 	}
+	
+	public function change_admin_password($new_pass = FALSE)
+	{
+		if(strlen($new_pass)>0){
+			$new_pass_hash = $this->hash_password($new_pass);
+			$this->db->where('username', 'admin');
+            return $this->db->update('users', array('password' => $new_pass_hash));
+		}else{
+			exit('Password length too short');
+		}
+	}
 }

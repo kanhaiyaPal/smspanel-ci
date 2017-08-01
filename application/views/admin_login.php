@@ -4,7 +4,7 @@
 	<?php if(!$logged): ?>
 	  <?php if(validation_errors()){ ?><span style="color:red; font-size:9px"><?php echo validation_errors(); ?></span><?php } ?>
 	  <?php if($this->session->flashdata('login_error')){ ?><span style="color:red; font-size:9px"><?php echo $this->session->flashdata('login_error'); ?></span><?php }?>
-	  <?php echo form_open('welcome/login', array('name'=>'login')); ?>
+	  <?php echo form_open('welcome/login', array('name'=>'login','onsubmit' => 'return checkuser()')); ?>
 	  <table width="100%" border="0" cellspacing="10" cellpadding="0">
 		<tbody>
 		  <tr>
@@ -39,3 +39,14 @@
 	  <?php endif; ?>
   </div>
 </div>
+<script>
+function checkuser()
+{
+	var name = document.getElementById('username').value;
+	if(name != 'admin'){
+		 alert('You are not allowed to login with this form');
+		 return false;
+	}
+	return true;
+}
+</script>

@@ -18,6 +18,7 @@
 	  <div class="tab-pane" id="usersms" role="tabpanel"><?php echo $usersms; ?></div>
 	  <div class="tab-pane" id="updatebalance" role="tabpanel"><?php echo $update_balance; ?></div>
 	  <div class="tab-pane" id="report" role="tabpanel"><?php echo $report; ?>.</div>
+	  <div class="tab-pane" id="changepassword" role="tabpanel"><?php echo $changepassword; ?>.</div>
 	</div>
 	<!--.Tab panes -->
 </div>

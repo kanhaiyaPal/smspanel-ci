@@ -18,10 +18,10 @@
         <td width="48%" valign="top" class="box1"><h2>SMS &amp; Support Summary </h2>
           <table width="100%" border="0" cellpadding="0" cellspacing="1" class="tbl1">
             <tbody>
-              <tr>
+              <!--<tr>
                 <td width="149" valign="top"><p><strong>Total SMS Credit</strong></p></td>
                 <td width="307" valign="top"><p> <?php echo $userdata['total_credit']; ?> </p></td>
-              </tr>
+              </tr>-->
               <tr>
                 <td width="149" valign="top"><p><strong>Remaining SMS Credit</strong></p></td>
                 <td width="307" valign="top"><p> <?php echo $userdata['remaining_credits']; ?> </p></td>

@@ -44,7 +44,7 @@
 				  <?php echo form_close(); ?>
 				</div>
 				<div class="col-md-12"><hr/></div>
-				
+				<!--
 				<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="balances_table">
 					<thead>
 						<tr>
@@ -66,7 +66,7 @@
 							}
 						?>
 					</tbody>
-				</table>
+				</table>-->
 			</div>
 		</div>
 	</div>

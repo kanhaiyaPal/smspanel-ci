@@ -110,6 +110,7 @@ class AdminDashboard extends CI_Controller {
 		$report['reports'] = $ret_reports;
 		
 		$data['report'] = $this->load->view('admindashboard/reports',$report, TRUE);
+		$data['changepassword'] = $this->load->view('admindashboard/changepassword',$report, TRUE);		
 		
         $this->load->view('templates/admin_header', $data);
         $this->load->view('admin_dashboard', $data);
@@ -517,4 +518,23 @@ class AdminDashboard extends CI_Controller {
 		}
 	}
 	/*=======Reports Funtions Ends ==========*/
+	
+	/*=======Password Change Functions=======*/
+	public function changeadmin_password()
+	{
+		$this->load->library('form_validation');
+		$this->load->model('authentication');
+		
+		$this->form_validation->set_rules('new_password', 'New Password', 'trim|required');
+		
+		if ($this->form_validation->run() == FALSE){
+			$this->session->set_flashdata('report_errors', validation_errors());
+			redirect(base_url().'admindashboard#report','refresh');
+		}else{
+			$this->authentication->change_admin_password($this->input->post('new_password'));
+			$this->authentication->logout_current_user();
+		}
+	}
+	
+	/*=======Password Change Functions Ends===*/
 }

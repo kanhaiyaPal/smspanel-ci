@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 24, 2017 at 05:50 AM
+-- Generation Time: Aug 01, 2017 at 11:44 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -44,7 +44,9 @@ INSERT INTO `sp_contacts` (`id`, `user_id`, `file_name`, `file_title`) VALUES
 (5, 9, '7a7174d478133d4abb66d1409d925e87.csv', ''),
 (6, 2, '664606c20e4962063421ab42ff9bd62a.txt', '300contacts'),
 (7, 2, '66348518a7a823b83164d63fc2df1de3.txt', '287contacts'),
-(8, 2, 'fedbe3fe080dd4087fcbdb2656ef5325.txt', '286contacts');
+(8, 2, 'fedbe3fe080dd4087fcbdb2656ef5325.txt', '286contacts'),
+(9, 9, 'w4eqysb7ul5keyqjokgatfcohipdmnsh.txt', '28-07-2017-09-38-46_autogenerate'),
+(10, 9, 'xdef4lob1mxo29t6kdqs0hng3gaiuhpj.txt', '01-08-2017-10-39-09_autogenerate');
 
 -- --------------------------------------------------------
 
@@ -66,7 +68,8 @@ CREATE TABLE `sp_notifications` (
 INSERT INTO `sp_notifications` (`id`, `name`, `description`, `opened_by`) VALUES
 (1, 'test1123', 'test1232222 fffff', '2'),
 (2, 'Uri', 'Uri test', '2'),
-(3, 'new test', 'new test test etest test testset testsetest', '2');
+(3, 'new test', 'new test test etest test testset testsetest', '2'),
+(4, 'Diwali Discount', 'This is description about diwali discount', '');
 
 -- --------------------------------------------------------
 
@@ -150,7 +153,9 @@ INSERT INTO `sp_sms` (`id`, `user_id`, `file_id`, `content`, `scheduled_on`, `ti
 (3, 2, 3, 'Happy Diw kjkjkjk kjjkjk jkjkjkjkjjkkjjk', '28-07-2017', '10AM-2PM'),
 (4, 2, 3, 'estest est estestest', '21-07-2017', '10AM-2PM'),
 (5, 2, 3, 'testes testes testestest steststest', '21-07-2017', '10AM-2PM'),
-(6, 2, 8, 'test estest', '30-07-2017', '10AM-2PM');
+(6, 2, 8, 'test estest', '30-07-2017', '10AM-2PM'),
+(7, 2, 9, 'test', '31-07-2017', '10AM-2PM'),
+(8, 2, 10, 'test', '25-08-2017', '3PM-7PM');
 
 -- --------------------------------------------------------
 
@@ -194,7 +199,9 @@ INSERT INTO `sp_update_balance` (`id`, `user_id`, `balance_updated`, `updated_by
 (1, 6, 23, '9', '2017-07-13 13:20:31'),
 (2, 6, 24, '9', '2017-07-13 13:22:36'),
 (3, 2, 25, '9', '2017-07-17 08:10:24'),
-(4, 2, 2, '9', '2017-07-20 12:47:02');
+(4, 2, 2, '9', '2017-07-20 12:47:02'),
+(5, 8, 1050, '9', '2017-07-31 07:34:31'),
+(6, 2, 100, '9', '2017-08-01 10:36:57');
 
 -- --------------------------------------------------------
 
@@ -227,12 +234,12 @@ CREATE TABLE `sp_users` (
 --
 
 INSERT INTO `sp_users` (`id`, `username`, `password`, `user_type`, `expiry_date`, `total_credits`, `current_credits`, `name`, `email`, `mobile`, `address`, `city`, `status`, `rm_name`, `rm_contact`, `rm_email`, `company`) VALUES
-(2, 'demo', '$2y$10$JDfl7cuBtiqXmClfDBtjEui05cVM9cXn5UiO9jH/0ztxzMJa2Vofy', 3, '21-07-2017', 400, 2, 'test_new', 'etstes@test.com', '7878787878', 'test', 'estet', 1, 'test', '3434343434', 'test@test.com', 'testest'),
+(2, 'demo', '$2y$10$JDfl7cuBtiqXmClfDBtjEui05cVM9cXn5UiO9jH/0ztxzMJa2Vofy', 3, '05-08-2017', 400, 98, 'test_new', 'etstes@test.com', '7878787878', 'test', 'estet', 1, 'test', '3434343434', 'test@test.com', 'testest'),
 (5, 'manishdua', '$2y$10$D9GPB23w5UdYWrTT2Ll2GuiIJtYRQj2oYrOMdx56ikuZkJso482Ha', 2, '29-07-2017', 400, 400, 'test', 'test@estest.com', '4545454545', 'test', 'test', 1, 'test', '4545454545', 'test@test.com', 'testest'),
 (6, 'demo2', '$2y$10$uHtwUaPsFKkwCcYWFs5Uheo1XpHWwuN/st1GZ26VxPdkhdnAtF.vG', 3, '05-08-2017', 400, 48, 'Snafu28', 'etstes@test.com', '5555555555', 'test', 'test', 1, 'testt', '3434343434', 'test@test.com', 'testest'),
 (7, 'enqtest', '$2y$10$G0XuvzU6lMP8.zRnE1YSReeUMxLyuiYCo3kqzL33UhIpURmWdgHr6', 3, '29-07-2017', 400, 400, 'test', 'test@test.com', '5555555555', 'test', 'test', 1, 'test', '3434343434', 'test@test.com', 'testest'),
-(8, 'user1', '$2y$10$NK0PpMf8hvxouAaQJhW58eEB5j4areWELP2GGklUlburZ3qEMHhp2', 3, '05-08-2017', 1000, 1000, 'test1', 'test1@test.com', '8989898989', 'Test Address, Test Road', 'estet', 0, 'testt', '3434343434', 'test@test.com', 'test'),
-(9, 'admin', '$2y$10$4XT/ZJjgbz4dnOaN8Ohxoe49j8vlPN1TjN058C/./jqSIdj/yPvlW', 1, '', 0, 0, 'Admin', '', '', '', '', 1, '', '', '', '');
+(8, 'user1', '$2y$10$NK0PpMf8hvxouAaQJhW58eEB5j4areWELP2GGklUlburZ3qEMHhp2', 3, '05-08-2017', 1000, 1050, 'test1', 'test1@test.com', '8989898989', 'Test Address, Test Road', 'estet', 0, 'testt', '3434343434', 'test@test.com', 'test'),
+(9, 'admin', '$2y$10$322Jxa6EtvsyeQ6zhz2YLu0DaehtXaMhK07VHLMOB5/2.qJiGNJQu', 1, '', 0, 0, 'Admin', '', '', '', '', 1, '', '', '', '');
 
 --
 -- Indexes for dumped tables
@@ -308,12 +315,12 @@ ALTER TABLE `sp_users`
 -- AUTO_INCREMENT for table `sp_contacts`
 --
 ALTER TABLE `sp_contacts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `sp_notifications`
 --
 ALTER TABLE `sp_notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `sp_offers_smsideas`
 --
@@ -333,7 +340,7 @@ ALTER TABLE `sp_reports`
 -- AUTO_INCREMENT for table `sp_sms`
 --
 ALTER TABLE `sp_sms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `sp_templates`
 --
@@ -343,7 +350,7 @@ ALTER TABLE `sp_templates`
 -- AUTO_INCREMENT for table `sp_update_balance`
 --
 ALTER TABLE `sp_update_balance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `sp_users`
 --

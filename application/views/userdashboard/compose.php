@@ -5,6 +5,7 @@
 		<div class="content-box-large">
 			<div class="panel-body">
 			<?php if($this->session->flashdata('compose_error')){ ?>
+			<script>alert('<?php echo $this->session->flashdata('compose_error'); ?>')</script>
 				<div class="alert alert-danger alert-dismissible" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -13,6 +14,7 @@
 				</div>
 				<?php } ?>
 				<?php if($this->session->flashdata('compose_success')){ ?>
+				<script>alert('Congratulations!! Your SMS has been scheduled successfully and You will receive confirmation SMS also')</script>
 				<div class="alert alert-success alert-dismissible" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>

@@ -320,6 +320,7 @@ class UserDashboard extends CI_Controller {
 		}
 	}
 	
+	/*Reports Functions*/
 	public function send_report_requistion()
 	{
 		$this->load->library('form_validation');

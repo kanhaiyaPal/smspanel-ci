@@ -63,7 +63,7 @@
 								echo '<tr>';
 								echo '<td>'.$item['name'].'</td>';
 								echo '<td>'.date('d-m-Y',strtotime($item['date'])).'</td>';
-								echo '<td><a href="'.base_url().'uploads/reports/'.$item['file_name'].'">'.$item['file_name'].'</a></td>';
+								echo '<td><a target="_blank" href="'.base_url().'uploads/reports/'.$item['file_name'].'">'.$item['file_name'].'</a></td>';
 								echo '<td><a href="'.base_url().'admindashboard/delete_reportgen/'.$item['id'].'"><img src="'.base_url().'assets/images/del.gif" width="12" height="12" border="0" class="text12"></a></td>';
 								echo '</tr>';
 							}

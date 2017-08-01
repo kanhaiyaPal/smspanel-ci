@@ -24,7 +24,7 @@
 			  <?php if(!$logged): ?>
 			  <?php if(validation_errors()){ ?><span style="color:red; font-size:9px"><?php echo validation_errors(); ?></span><?php } ?>
 			  <?php if($this->session->flashdata('login_error')){ ?><span style="color:red; font-size:9px"><?php echo $this->session->flashdata('login_error'); ?></span><?php }?>
-              <?php echo form_open('welcome/login'); ?>
+              <?php echo form_open('welcome/login',array('onsubmit' => 'return checkuser()')); ?>
               <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tbody>
                   <tr>
@@ -34,7 +34,7 @@
                   </tr>
                   <tr>
                     <td><label>
-                      <input name="username" type="text" class="textfield1" id="username" value="<?php echo set_value('username'); ?>">
+                      <input name="username" type="text" class="textfield1" id="username_u" value="<?php echo set_value('username'); ?>">
                       </label></td>
                     <td><input name="lpassword" type="password" class="textfield1" id="lpassword" value=""></td>
                     <td><label>
@@ -62,3 +62,14 @@
     </table>
   </div>
 </div>
+<script>
+function checkuser()
+{
+	var name_u = document.getElementById('username_u').value;
+	if(name_u == 'admin'){
+		alert('Login Not Allowed.');
+		return false;
+	}
+	return true;
+}
+</script>

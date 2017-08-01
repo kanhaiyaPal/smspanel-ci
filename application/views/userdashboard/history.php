@@ -22,7 +22,7 @@
 							foreach($smsitems as $item) {
 								echo '<tr>';
 								echo '<td>'.$item['cont_count'].'</td>';
-								echo '<td><a href="'.base_url().'uploads/contacts/'.$item['orig_file'].'">'.$item['file_name'].'</a></td>';
+								echo '<td><a target="_blank" href="'.base_url().'uploads/contacts/'.$item['orig_file'].'">'.$item['file_name'].'</a></td>';
 								echo '<td>'.$item['sms'].'</td>';
 								echo '<td>'.$item['schedule'].'</td>';
 								echo '</tr>';

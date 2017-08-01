@@ -46,6 +46,9 @@
 		<a class="nav-link" data-toggle="tab" href="#report" role="tab">Report</a>
 	  </li>
 	  <li class="nav-item">
+		<a class="nav-link" data-toggle="tab" href="#changepassword" role="tab">Password</a>
+	  </li>
+	  <li class="nav-item">
 		<a class="nav-link" href="<?php echo base_url(); ?>admindashboard/logout" role="tab">Logout</a>
 	  </li>
 	</ul>

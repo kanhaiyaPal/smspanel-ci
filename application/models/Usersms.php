@@ -83,7 +83,7 @@ class Usersms extends CI_Model {
 		
 		$this->send_sms_mail($email_dt);
 		
-		if((int)$upd_crd <= 2){
+		if((int)$upd_crd <= 2000){
 			$this->send_lowbalance_mail($email_dt);
 		}
 		
@@ -200,7 +200,7 @@ class Usersms extends CI_Model {
 		$html_msg = '<table width="600"  border="0" cellspacing="0" cellpadding="15" style="border:solid 3px #0000CC; color:#333"><tr><td bgcolor="#0000FF"><a href="www.sms.smsplus.in/"><img src="'.base_url().'assets/images/logo1.png" alt="SMS Plus" /></a></td></tr><tr><td style="font-family:Arial, Helvetica, sans-serif; font-size:12px;"><table width="600"  border="0" cellspacing="0" cellpadding="15">';
 		$html_msg .= '<tr><td colspan="2">A new SMS has been scheduled by '.$this->session->userdata('user_session')['username'].'</td></tr>';
 		$html_msg .= '<tr>';
-		$html_msg .= '<td>File : </td><td>'.base_url().'uploads/contacts/'.$file_det['file_name'].'</td>';
+		$html_msg .= '<td>File : </td><td><a href="'.base_url().'uploads/contacts/'.$file_det['file_name'].'" >Click to view uploaded file</a></td>';
 		$html_msg .= '</tr><tr>';
 		$html_msg .= '<td>SMS Content: </td><td>'.$req_data['content'].'</td>';
 		$html_msg .= '</tr><tr>';

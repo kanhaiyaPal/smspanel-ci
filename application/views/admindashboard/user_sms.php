@@ -47,7 +47,7 @@
 								echo '<td>'.$item['name'].'</td>';
 								echo '<td>'.$item['text'].'</td>';
 								echo '<td>'.$item['date_time'].'</td>';
-								echo '<td><a href="'.base_url().'uploads/contacts/'.$item['org_file'].'">'.$item['file_title'].'</a></td>';
+								echo '<td><a target="_blank" href="'.base_url().'uploads/contacts/'.$item['org_file'].'">'.$item['file_title'].'</a></td>';
 								echo '<td><a href="#" data-toggle="modal" data-target="#showdetailusersms" 
 								data-name="'.$item['name'].'" 
 								data-smstext ="'.$item['text'].'" 
