@@ -38,13 +38,13 @@
 						<div class="col-md-4">
 							<input type="text" name="balance_sms_count" pattern="\d*" id="update_bl_curr_cr" class="form-control" required placeholder="Number of SMS" />
 						</div>
-						<div class="col-md-4"><input class="btn btn-primary" type="submit" name="addbalance" value="Add" /></div>
+						<div class="col-md-4"><input class="btn btn-primary" type="submit" name="addbalance" value="Update" /></div>
 					</div>
 				  </div>
 				  <?php echo form_close(); ?>
 				</div>
 				<div class="col-md-12"><hr/></div>
-				<!--
+				<?php /*
 				<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="balances_table">
 					<thead>
 						<tr>
@@ -66,7 +66,27 @@
 							}
 						?>
 					</tbody>
-				</table>-->
+				</table> */ ?>
+				<?php if(count($users) > 0): ?>
+				<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="balances_table">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Balance</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+							foreach($users as $item) {
+								echo '<tr>';
+								echo '<td>'.$item['name'].'</td>';
+								echo '<td>'.$item['current_credits'].'</td>';
+								echo '</tr>';
+							}
+						?>
+					</tbody>
+				</table>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>

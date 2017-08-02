@@ -238,17 +238,16 @@ class UserDashboard extends CI_Controller {
 	{
 		$this->load->library('form_validation');
 		
-		$this->form_validation->set_rules('file_title', 'File Name', 'trim|required');
-		
-		if ($this->form_validation->run() == FALSE){
-			$this->session->set_flashdata('contact_error', validation_errors());
-			redirect(base_url().'userdashboard#uploadcontact','refresh');
-		}else{
+		if($_FILES['contact_file']['name']!= ''){
 			$this->load->model('contact');
 			$this->contact->set_contact();
 			$this->session->set_flashdata('contact_success', 'Contact Saved Successfully');
 			redirect(base_url().'userdashboard#uploadcontact','refresh');
+		}else{
+			$this->session->set_flashdata('contact_error', 'File field cannot be empty');
+			redirect(base_url().'userdashboard#uploadcontact','refresh');
 		}
+
 	}
 	
 	public function deletecontact_content($id = 0)
@@ -278,7 +277,7 @@ class UserDashboard extends CI_Controller {
 			$this->load->model('usersms');
 			$this->usersms->set_usersms();
 			$this->session->set_flashdata('compose_success', 'SMS Sent Successfully');
-			redirect(base_url().'userdashboard#composesms','refresh');
+			redirect(base_url().'userdashboard#dashboard','refresh');
 		}
 	}
 	

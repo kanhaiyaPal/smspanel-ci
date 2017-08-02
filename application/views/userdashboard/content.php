@@ -27,9 +27,9 @@
 				  <?php echo form_open_multipart('userdashboard/addnew_contact_content',array('onsubmit'=>'checkFile(event)')); ?>
 				  <div class="col-md-12">
 					<div class="row">
-					  <div class="col-md-3">
+					  <!--<div class="col-md-3">
 							<input type="text" name="file_title" class="form-control" required placeholder="Name of File" />
-						</div>
+						</div>-->
 						<div class="col-md-3">
 							<input type="file" name="contact_file" class="form-control " required />
 						</div>

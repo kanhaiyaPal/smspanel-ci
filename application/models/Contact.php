@@ -46,7 +46,7 @@ class Contact extends CI_Model {
 				$fdata = array(
 					'file_name' => $file_data['file_name'],
 					'user_id' => $this->session->userdata('user_session')['uid'],
-					'file_title' => $this->input->post('file_title')
+					'file_title' => str_replace($file_data['file_ext'],"",$file_data['client_name']).'_'.date('d-m-Y')
 				);
 				$this->db->insert('contacts', $fdata);
 				$file_id = $this->db->insert_id();

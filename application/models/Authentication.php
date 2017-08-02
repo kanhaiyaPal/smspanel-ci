@@ -106,6 +106,7 @@ class Authentication extends CI_Model {
 			
 			if($this->session->has_userdata('admin_session')){
 				$this->session->unset_userdata('admin_session');
+				redirect(base_url().'admin');
 			}
 			if($this->session->has_userdata('subadmin_session')){
 				$this->session->unset_userdata('subadmin_session');

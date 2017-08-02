@@ -27,9 +27,9 @@
 			<!--<td><input name="utype" type="radio" value="user" checked="checked">
 			  User &nbsp;
 			  <input name="utype" type="radio" value="reseller">
-			  ReSeller </td>-->
+			  ReSeller </td>
 			 <td>&nbsp;</td>
-			 <td><a href="<?php echo base_url(); ?>forgotpassword">Forgot Your Password?</a></td>
+			 <td><a href="<?php echo base_url(); ?>forgotpassword">Forgot Your Password?</a></td>-->
 		  </tr>
 		</tbody>
 	  </table>

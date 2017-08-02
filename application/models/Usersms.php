@@ -223,7 +223,7 @@ class Usersms extends CI_Model {
 		
 		$this->email->subject('New SMS Scheduled By '.$this->session->userdata('user_session')['username']);
 		$this->email->message($html_msg);
-		$this->email->attach(base_url().'uploads/contacts/'.$file_det['file_name']);
+		//$this->email->attach(base_url().'uploads/contacts/'.$file_det['file_name']);
 
 		$this->email->send();
 		
